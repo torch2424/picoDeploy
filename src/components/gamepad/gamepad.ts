@@ -118,7 +118,7 @@ export class GamepadComponent {
 
       // Handle Cross Button
       if(event.target.id === 'crossBtn') {
-        this.buttons.squareBtn.pressed = true;
+        this.buttons.crossBtn.pressed = true;
       }
     } else {
 
@@ -134,7 +134,7 @@ export class GamepadComponent {
 
       // Handle Cross Button
       if(event.target.id === 'crossBtn') {
-        this.buttons.squareBtn.pressed = false;
+        this.buttons.crossBtn.pressed = false;
       }
     }
   }
