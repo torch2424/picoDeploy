@@ -95,14 +95,14 @@ export class GamepadComponent {
         // Only using the first touch, since we shouldn't be having two fingers on the dpad
         const touch = event.touches[0];
 
-        // TODO: Create a deadzone
-
         // Find if the horizontal or vertical influence is greater
         // Find our centers of our rectangles, and our unbiased X Y values on the rect
         const rectCenterX = (this.buttons.dpad.rect.right - this.buttons.dpad.rect.left) / 2;
         const rectCenterY = (this.buttons.dpad.rect.bottom - this.buttons.dpad.rect.top) / 2;
         const touchX = touch.clientX - this.buttons.dpad.rect.left;
         const touchY = touch.clientY - this.buttons.dpad.rect.top;
+
+        // TODO: Create a deadzone (Especially the Y axis) using touchX and touch Y
 
         // Determine if we are horizontal or vertical
         const isHorizontal = Math.abs(rectCenterX - touchX) > Math.abs(rectCenterY - touchY);
