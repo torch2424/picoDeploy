@@ -13,6 +13,7 @@ import { Component } from '@angular/core';
 export class GamepadComponent {
 
   buttons: any
+  currentTouch: any
 
   constructor() {
     console.log('Hello GamepadComponent Component');
@@ -87,6 +88,9 @@ export class GamepadComponent {
         // Calculate for the correct key
         // Only using the first touch, since we shouldn't be having two fingers on the dpad
         const touch = event.touches[0];
+        this.currentTouch = JSON.stringify(touch, null, 2);
+
+        // TODO: Create a deadzone
 
         // Find if the horizontal or vertical influence is greater
         const isHorizontal =
