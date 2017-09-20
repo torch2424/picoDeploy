@@ -70,12 +70,18 @@ export class GamepadComponent {
   // Our handler function for touch events
   // Will stop event from propogating, and pass to the correct handler
   touchEventHandler(event) {
+    if (!event) return
+
     event.stopPropagation();
     event.preventDefault();
-    console.log(event);
-    Array.from(event.touches).forEach(touch => {
-      console.log('Hai!', touch);
-    });
+
+    if (event.touches[0]) {
+      this.currentTouch = JSON.stringify({
+        target: event.target.id,
+        clientX: event.touches[0].clientX,
+        clientY: event.touches[0].clientY
+      }, null, 2);
+    }
 
     // Get our key event info
     if(event.type === "touchstart" || event.type === "touchmove") {
@@ -88,25 +94,29 @@ export class GamepadComponent {
         // Calculate for the correct key
         // Only using the first touch, since we shouldn't be having two fingers on the dpad
         const touch = event.touches[0];
-        this.currentTouch = JSON.stringify(touch, null, 2);
 
         // TODO: Create a deadzone
 
         // Find if the horizontal or vertical influence is greater
-        const isHorizontal =
-          Math.abs(this.buttons.dpad.rect.left + (this.buttons.dpad.rect.width / 2) - touch.clientX) >
-          Math.abs(this.buttons.dpad.rect.top + (this.buttons.dpad.rect.height / 2) - touch.clientY);
+        // Find our centers of our rectangles, and our unbiased X Y values on the rect
+        const rectCenterX = (this.buttons.dpad.rect.right - this.buttons.dpad.rect.left) / 2;
+        const rectCenterY = (this.buttons.dpad.rect.bottom - this.buttons.dpad.rect.top) / 2;
+        const touchX = touch.clientX - this.buttons.dpad.rect.left;
+        const touchY = touch.clientY - this.buttons.dpad.rect.top;
 
-        // Find the greatest absolute value, -X, +X, -Y, +Y
+        // Determine if we are horizontal or vertical
+        const isHorizontal = Math.abs(rectCenterX - touchX) > Math.abs(rectCenterY - touchY);
+
+        // Find if left or right from width, vice versa for height
         if(isHorizontal) {
-          const isLeft = this.buttons.dpad.rect.left + (this.buttons.dpad.rect.width / 2) > touch.clientX;
+          const isLeft = touchX < (this.buttons.dpad.rect.width / 2);
           if(isLeft) {
             this.buttons.dpad.pressed.left = true;
           } else {
             this.buttons.dpad.pressed.right = true;
           }
         } else {
-          const isUp = this.buttons.dpad.rect.top + (this.buttons.dpad.rect.height / 2) > touch.clientY;
+          const isUp = touchY < (this.buttons.dpad.rect.height / 2);
           if(isUp) {
             this.buttons.dpad.pressed.up = true;
           } else {
