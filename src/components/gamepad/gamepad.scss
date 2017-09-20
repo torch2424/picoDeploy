@@ -10,4 +10,13 @@ gamepad {
   @include smq__not-mobile {
     display: none;
   }
+
+  .dpad {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    width: 25vw;
+    height: auto;
+  }
 }
