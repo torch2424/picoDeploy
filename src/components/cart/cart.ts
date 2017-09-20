@@ -15,12 +15,10 @@ export class CartComponent {
   canvas: HTMLCanvasElement;
 
   constructor() {
-    console.log('Hello CartComponent Component');
   }
 
   ngOnInit() {
-    console.log("I'm alive!");
-
+    // Get our canvas element
     this.canvas = <HTMLCanvasElement> document.getElementById("canvas");
 		this.canvas.width = window.innerWidth;
 		this.canvas.height = window.innerHeight;
@@ -42,5 +40,11 @@ export class CartComponent {
         }
       }
     }, false);
+
+    // Lastly, load the cart
+    const cartScript = document.createElement('script');
+    cartScript.setAttribute('src', 'cart/cart.js');
+    cartScript.setAttribute('type', 'text/javascript');
+    document.body.appendChild(cartScript);
   }
 }
