@@ -12,11 +12,8 @@ import { Component } from '@angular/core';
 })
 export class GamepadComponent {
 
-  text: string;
-
   constructor() {
     console.log('Hello GamepadComponent Component');
-    this.text = 'Hello World';
   }
 
 }
