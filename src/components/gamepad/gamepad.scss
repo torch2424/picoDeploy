@@ -1,3 +1,8 @@
+
+// Define some nice variables for our UI
+$dpadSize: 20vw;
+$buttonSize: 15vw;
+
 gamepad {
   position: absolute;
   top: 0px;
@@ -16,7 +21,25 @@ gamepad {
     bottom: 0;
     left: 0;
 
-    width: 25vw;
+    width: $dpadSize;
+    height: auto;
+  }
+
+  .squareBtn {
+    position: absolute;
+    bottom: 0;
+    right: calc(#{$buttonSize} + 1vw);
+
+    width: $buttonSize;
+    height: auto;
+  }
+
+  .crossBtn {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+
+    width: $buttonSize;
     height: auto;
   }
 }
