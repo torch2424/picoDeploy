@@ -9,13 +9,14 @@
   "scripts": {
     "clean": "ionic-app-scripts clean",
     "lint": "ionic-app-scripts lint",
+    "cart": "cp -r cart www/",
     "build": "npm run ionic:build",
     "serve": "npm run ionic:serve",
-    "ionic:build": "ionic-app-scripts build",
-    "ionic:serve": "ionic-app-scripts serve",
-    "electron:build": "npm run ionic:build --prod && electron-builder",
-    "electron:serve": "npm run ionic:build --prod && ./node_modules/.bin/electron .",
-    "electron:pack": "npm run ionic:build --prod && electron-builder --dir"
+    "ionic:build": "npm run cart && ionic-app-scripts build",
+    "ionic:serve": "npm run cart &&  ionic-app-scripts serve",
+    "electron:build": "npm run cart &&  npm run ionic:build --prod && electron-builder",
+    "electron:serve": "npm run cart &&  npm run ionic:build --prod && ./node_modules/.bin/electron .",
+    "electron:pack": "npm run cart &&  npm run ionic:build --prod && electron-builder --dir"
   },
   "build": {
     "appId": "com.example.picoDeploy",

@@ -1,0 +1,25 @@
+cart {
+  height: 100%;
+
+  // Our container
+  .cart {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+
+  // Our canvas object
+  canvas#canvas {
+    height: 100%;
+    width: auto;
+
+    image-rendering: optimizeSpeed;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: optimize-contrast;
+    image-rendering: pixelated;
+    -ms-interpolation-mode: nearest-neighbor;
+    border: 0px
+  }
+}

@@ -13,7 +13,7 @@ canvas#canvas { width: 512px; height: 512px; }
 .pico8_el {
 	float:left;
 	width:92px;
-	display:inline-block;
+	display:inline-block; 
   	margin: 1px;
 	padding: 4px;
 	text-align: center;
@@ -49,7 +49,7 @@ canvas{
 
 -->
 </STYLE>
-
+    
 </head>
 
 <body bgcolor=#303030>
@@ -67,17 +67,17 @@ canvas{
 
 		// show Emscripten environment where the canvas is
 		// arguments are passed to PICO-8
-
+		
 		var Module = {};
 		Module.canvas = canvas;
-
+		
 		/*
 			// When pico8_buttons is defined, PICO-8 takes each int to be a live bitfield
 			// representing the state of each player's buttons
-
+			
 			var pico8_buttons = [0, 0, 0, 0, 0, 0, 0, 0]; // max 8 players
 			pico8_buttons[0] = 2 | 16; // example: player 0, RIGHT and Z held down
-
+			
 			// when pico8_gpio is defined, reading and writing to gpio pins will
 			// read and write to these values
 			var pico8_gpio = new Array(128);
@@ -85,10 +85,10 @@ canvas{
 	</script>
 
 	<script async type="text/javascript" src="cart.js"></script>
-
+	  
 	<script>
 		// key blocker. prevent cursor keys from scrolling page while playing cart.
-
+		
 		function onKeyDown_blocker(event) {
 			event = event || window.event;
 			var o = document.activeElement;
@@ -104,7 +104,7 @@ canvas{
 		document.addEventListener('keydown', onKeyDown_blocker, false);
 
 	</script>
-
+        
 	<br>
 
 	<div class=pico8_el onclick="Module.pico8Reset();">
@@ -124,16 +124,18 @@ canvas{
 	Fullscreen</div>
 	<div class=pico8_el onclick="Module.pico8ToggleSound();">
 	<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAXklEQVR4Ae2doQ4AIQxD4YLH8v9fh+ULhjpxxSwLg2uyapr1JRu1iV5Z+1BGl4+xNpX38SYo2uRvYiT5LwEmt+ocgXVLrhPEgBiw8Q5w7/kueSkK+D2tJO4E/I3GrwkqQCBabEj/4QAAABB0RVh0TG9kZVBORwAyMDExMDIyMeNZtsEAAAAASUVORK5CYII=" alt="Toggle Sound" width=12 height=12/>
-
+	
 	Sound</div>
 	<div class=pico8_el ><a target="_new" href="http://www.lexaloffle.com/bbs/?cat=7&sub=2">
 	<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAlElEQVR4Ae2dMQ5FQBCGh6jcwAkkateg3DiAa+iQUGqVKi95FQfAJRQOoHeBUf8JyQqKjZ1uMzuz2e/LTE3KhyF7kSlgLOykas23f6D+A9Yp84aAOYU15pcJnfji0Il2ID8HzC4y38ZrnfIBGxeRoR3c3EWrACdsV5BOsx7OSRnrOXh4F5HzA6bevwUn8wlz7eCDsQM99B3ks0s/4QAAABB0RVh0TG9kZVBORwAyMDExMDIyMeNZtsEAAAAASUVORK5CYII=" alt="More Carts" width=12 height=12/>
 
 	Carts</a></div>
 
-	<br>
+	<br>	
 
 	</div></center>
 	<br><br>
 
 </body></html>
+
+
