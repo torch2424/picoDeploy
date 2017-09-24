@@ -4,12 +4,16 @@ import { CartComponent } from './cart/cart';
 import { GamepadComponent } from './gamepad/gamepad';
 import { PicosplashComponent } from './picosplash/picosplash';
 @NgModule({
-	declarations: [CartComponent,
+	declarations: [
+    CartComponent,
     GamepadComponent,
-    PicosplashComponent],
+    PicosplashComponent
+  ],
 	imports: [IonicModule],
-	exports: [CartComponent,
+	exports: [
+    CartComponent,
     GamepadComponent,
-    PicosplashComponent]
+    PicosplashComponent
+  ]
 })
 export class ComponentsModule {}

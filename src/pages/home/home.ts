@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, IonicPage } from 'ionic-angular';
+import { ModalController, NavController, IonicPage } from 'ionic-angular';
 
 @IonicPage()
 @Component({
@@ -8,8 +8,16 @@ import { NavController, IonicPage } from 'ionic-angular';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController) {
+  settingsModal: any
 
+  constructor(public modalCtrl: ModalController, public navCtrl: NavController) {
+  }
+
+  ngOnInit() {
+    this.settingsModal = this.modalCtrl.create('SettingsModal', { userId: 8675309 });
+    setTimeout(() => {
+      this.settingsModal.present();
+    }, 7000);
   }
 
 }
