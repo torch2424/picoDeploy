@@ -1,0 +1,16 @@
+.settings__header, .settings__header * {
+  color: $inverse;
+}
+
+.settings__header, .settings__header .toolbar-background {
+  background-color: $transparent-50;
+}
+
+.settings__container {
+  color: $inverse;
+  background-color: $transparent-50;
+
+  .scroll-content {
+    padding: 10px;
+  }
+}

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 /**
  * Generated class for the GamepadComponent component.
@@ -11,6 +11,7 @@ import { Component } from '@angular/core';
   templateUrl: 'gamepad.html'
 })
 export class GamepadComponent {
+  @Output() onSettingsClick: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   buttons: any
   currentTouch: any
@@ -19,7 +20,6 @@ export class GamepadComponent {
   }
 
   ngOnInit() {
-
     // Get our buttons, and their position
     this.buttons = {
       dpad: {
@@ -38,6 +38,9 @@ export class GamepadComponent {
       crossBtn: {
         element: document.getElementById('crossBtn'),
         pressed: false
+      },
+      settingsBtn: {
+        element: document.getElementById('settingsBtn'),
       }
     }
 
@@ -56,6 +59,12 @@ export class GamepadComponent {
         this.touchEventHandler(event);
       }, false);
       this.buttons[button].element.addEventListener("touchend", (event) => {
+        this.touchEventHandler(event);
+      }, false);
+      this.buttons[button].element.addEventListener("mousedown", (event) => {
+        this.touchEventHandler(event);
+      }, false);
+      this.buttons[button].element.addEventListener("mouseup", (event) => {
         this.touchEventHandler(event);
       }, false);
     });
@@ -87,7 +96,9 @@ export class GamepadComponent {
     //this.debugCurrentTouch(event)
 
     // Get our key event info
-    if(event.type === "touchstart" || event.type === "touchmove") {
+    if(event.type === "touchstart" ||
+      event.type === "touchmove" ||
+      event.type === "mousedown") {
 
       // Handle Dpad events
       if(event.target.id === 'dpad') {
@@ -137,6 +148,11 @@ export class GamepadComponent {
       // Handle Cross Button
       if(event.target.id === 'crossBtn') {
         this.buttons.crossBtn.pressed = true;
+      }
+
+      // Handle Settings Button
+      if(event.target.id === 'settingsBtn') {
+        this.onSettingsClick.emit(true);
       }
     } else {
 

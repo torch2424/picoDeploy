@@ -15,5 +15,6 @@ export class SettingsModal {
 
  closeModal() {
     this.view.dismiss();
+    (<any>window).Module.pico8SetPaused(false);
   }
 }

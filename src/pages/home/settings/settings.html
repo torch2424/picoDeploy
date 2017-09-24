@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header class="settings__header">
   <ion-navbar>
     <ion-title>Settings</ion-title>
     <ion-buttons end>
@@ -8,6 +8,13 @@
 
 </ion-header>
 
-<ion-content padding>
+<ion-content class="settings__container">
   I am the settings modal
+
+  <ion-list no-lines>
+    <ion-item>
+      <ion-label>Sound</ion-label>
+      <ion-toggle checked="{{settings.sound}}"></ion-toggle>
+    </ion-item>
+  </ion-list>
 </ion-content>

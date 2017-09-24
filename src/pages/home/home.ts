@@ -15,9 +15,10 @@ export class HomePage {
 
   ngOnInit() {
     this.settingsModal = this.modalCtrl.create('SettingsModal', { userId: 8675309 });
-    setTimeout(() => {
-      this.settingsModal.present();
-    }, 7000);
   }
 
+  openSettings() {
+    (<any>window).Module.pico8SetPaused(true);
+    this.settingsModal.present();
+  }
 }
