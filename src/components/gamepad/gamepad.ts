@@ -16,7 +16,6 @@ export class GamepadComponent {
   currentTouch: any
 
   constructor() {
-    console.log('Hello GamepadComponent Component');
   }
 
   ngOnInit() {
@@ -42,12 +41,10 @@ export class GamepadComponent {
       }
     }
 
-    // Read from the DOM, and get each of our elements position, doing this here, as it is best to read from the dom in sequence
-    // use element.getBoundingRect() top, bottom, left, right to get clientX and clientY in touch events :)
-    // https://stackoverflow.com/questions/442404/retrieve-the-position-x-y-of-an-html-element
-    Object.keys(this.buttons).forEach((button) => {
-      const buttonBoundingRect = this.buttons[button].element.getBoundingClientRect();
-      this.buttons[button].rect = buttonBoundingRect;
+    this.updateGamepadRect();
+    // Add a resize listen to update the gamepad rect on resize
+    window.addEventListener("resize", () => {
+      this.updateGamepadRect();
     });
 
     // Loop through our buttons and add touch events
@@ -67,6 +64,18 @@ export class GamepadComponent {
     window.requestAnimationFrame(() => this.updatePico8Controller());
   }
 
+  // Function to update button position and size
+  updateGamepadRect() {
+    // Read from the DOM, and get each of our elements position, doing this here, as it is best to read from the dom in sequence
+    // use element.getBoundingRect() top, bottom, left, right to get clientX and clientY in touch events :)
+    // https://stackoverflow.com/questions/442404/retrieve-the-position-x-y-of-an-html-element
+    //console.log("GamepadComponent: Updating Rect()...");
+    Object.keys(this.buttons).forEach((button) => {
+      const buttonBoundingRect = this.buttons[button].element.getBoundingClientRect();
+      this.buttons[button].rect = buttonBoundingRect;
+    });
+  }
+
   // Our handler function for touch events
   // Will stop event from propogating, and pass to the correct handler
   touchEventHandler(event) {
@@ -75,13 +84,7 @@ export class GamepadComponent {
     event.stopPropagation();
     event.preventDefault();
 
-    if (event.touches[0]) {
-      this.currentTouch = JSON.stringify({
-        target: event.target.id,
-        clientX: event.touches[0].clientX,
-        clientY: event.touches[0].clientY
-      }, null, 2);
-    }
+    //this.debugCurrentTouch(event)
 
     // Get our key event info
     if(event.type === "touchstart" || event.type === "touchmove") {
@@ -193,6 +196,16 @@ export class GamepadComponent {
 
     // Call the update next frame
     window.requestAnimationFrame(() => this.updatePico8Controller());
+  }
+
+  debugCurrentTouch(event) {
+    if (event.touches[0]) {
+      this.currentTouch = JSON.stringify({
+        target: event.target.id,
+        clientX: event.touches[0].clientX,
+        clientY: event.touches[0].clientY
+      }, null, 2);
+    }
   }
 
 }

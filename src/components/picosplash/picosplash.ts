@@ -16,7 +16,6 @@ export class PicosplashComponent {
   cartMuted: boolean
 
   constructor() {
-    console.log('Hello PicosplashComponent Component');
     this.initializingCart = true;
     this.cartMuted = false;
   }
