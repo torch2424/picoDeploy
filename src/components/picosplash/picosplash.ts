@@ -25,30 +25,45 @@ export class PicosplashComponent {
     this.listenForCartRun();
   }
 
+  // Function to ping the window cart Module,
+  // to performa actions based on the surretn cart status
   listenForCartRun() {
-    console.log(window.status)
-    if((<any>window).Module && (<any>window).Module["calledRun"]) {
-      // Wait an additional second before hiding the splash
+    // Check to mute the initial cart sound
+    if((<any>window).Module &&
+      (<any>window).Module.pico8ToggleSound &&
+      (<any>window).Module["calledRun"]) {
+
+      // Toggle sound off
+      if(!this.cartMuted) {
+        (<any>window).Module.pico8ToggleSound();
+        this.cartMuted = true;
+      }
+    }
+
+    // Check for when the cart is full loaded
+    // The carts "cart data position" will change past zero once the cart is fully loaded and interpreted
+    if((<any>window).Module && (<any>window)._cdpos > 0) {
+
+      // Toggle sound back on in a second
       setTimeout(() => {
         // Toggle sound back on
         if(this.cartMuted) {
           (<any>window).Module.pico8ToggleSound();
         }
-        this.initializingCart = false;
 
+        // Wait for the sound on prompt to disappear
+        setTimeout(() => {
+          this.initializingCart = false;
+        }, 1000)
       }, 1000);
-    } else {
 
-      if(!this.cartMuted && (<any>window).Module && (<any>window).Module.pico8ToggleSound) {
-        // Toggle sound back off
-        (<any>window).Module.pico8ToggleSound();
-        this.cartMuted = true;
-      }
-
-      setTimeout(() => {
-        this.listenForCartRun();
-      }, 250);
+      // Return to stop listening
+      return;
     }
-  }
 
+    // Listen for the cart
+    setTimeout(() => {
+      this.listenForCartRun();
+    }, 250);
+  }
 }
