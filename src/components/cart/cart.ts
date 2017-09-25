@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 /**
  * Generated class for the CartComponent component.
@@ -11,6 +11,8 @@ import { Component } from '@angular/core';
   templateUrl: 'cart.html'
 })
 export class CartComponent {
+  @Output() onPause: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() onOption: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   canvas: HTMLCanvasElement;
 
@@ -37,6 +39,23 @@ export class CartComponent {
       if (!o || o == document.body || o.tagName == "canvas") {
         if ([32, 37, 38, 39, 40].indexOf(event.keyCode) > -1) {
           if (event.preventDefault) event.preventDefault();
+        }
+        // Also check for Enter/Paause and O for onOption
+        // Escape will cause a lot of problems with Ionic :(
+        // Doing everything to stop this propogation, even on other handlers
+        // https://javascript.info/bubbling-and-capturing
+        if ([13, 80].indexOf(event.keyCode) > -1) {
+          if (event.stopImmediatePropagation) event.stopImmediatePropagation();
+          if (event.stopPropagation) event.stopPropagation();
+          if (event.preventDefault) event.preventDefault();
+          this.onPause.emit(true);
+        }
+        if ([79].indexOf(event.keyCode) > -1) {
+          if (event.stopImmediatePropagation) event.stopImmediatePropagation();
+          if (event.stopPropagation) event.stopPropagation();
+          if (event.preventDefault) event.preventDefault();
+          // In a timeout to stop modal from closing itself
+          this.onOption.emit(true);
         }
       }
     }, false);

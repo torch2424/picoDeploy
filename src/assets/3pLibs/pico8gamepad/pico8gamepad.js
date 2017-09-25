@@ -46,12 +46,12 @@ function updateGamepads() {
   	bitmask |= (axis(gp,1) < -stickDeadzone || axis(gp,3) < -stickDeadzone || btn(gp,12)) ? 4 : 0;  // up
   	bitmask |= (axis(gp,1) > +stickDeadzone || axis(gp,3) > +stickDeadzone || btn(gp,13)) ? 8 : 0; // down
     // O and X buttons
-    var pressedO = 
+    var pressedO =
     	(mapFaceButtons && (btn(gp,0) || btn(gp,2))) ||
     	(mapShoulderButtons && btn(gp,5)) ||
     	(mapTriggerButtons && btn(gp,7)) ||
     	(mapStickButtons && btn(gp,11));
-    var pressedX = 
+    var pressedX =
     	(mapFaceButtons && (btn(gp,1) || btn(gp,3))) ||
     	(mapShoulderButtons && btn(gp,4)) ||
     	(mapTriggerButtons && btn(gp,6)) ||
@@ -62,9 +62,13 @@ function updateGamepads() {
   	pico8_buttons[player] |= bitmask;
   	// pause button is a bit different - PICO-8 only respects the 6th bit on the first player's input
   	// we allow all controllers to influence it, regardless of number of players
-  	pico8_buttons[0] |= (btn(gp,8) || btn(gp,9)) ? 64 : 0;
+    // NOTE: (torch2424): Not allowing the native pico8 pause menu
+  	//pico8_buttons[0] |= (btn(gp,8) || btn(gp,9)) ? 64 : 0;
+    if((btn(gp,8) || btn(gp,9))) {
+      window.Module.pico8TogglePaused();
+    }
   }
- 
+
   requestAnimationFrame(updateGamepads);
 }
 

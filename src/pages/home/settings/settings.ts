@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, ViewController } from 'ionic-angular';
+import { IonicPage, ViewController, NavParams } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { SettingsProvider } from '../../../providers/settings/settings';
 
@@ -12,7 +12,9 @@ import { SettingsProvider } from '../../../providers/settings/settings';
 })
 export class SettingsModal {
 
- constructor(private view: ViewController, public settingsProvider: SettingsProvider) {
+  isOpen: boolean
+
+ constructor(private params: NavParams, private view: ViewController, public settingsProvider: SettingsProvider) {
  }
 
  // Function on sound click
@@ -24,5 +26,8 @@ export class SettingsModal {
  closeModal() {
     this.view.dismiss();
     (<any>window).Module.pico8SetPaused(false);
+    if(this.params.get('onClose')) {
+      this.params.get('onClose')();
+    }
   }
 }

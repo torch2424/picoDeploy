@@ -18,8 +18,8 @@
   <picosplash></picosplash>
 
   <!-- Our Cart Component -->
-  <cart></cart>
+  <cart (onPause)="pauseGame()" (onOption)="openSettings()"></cart>
 
   <!-- Our Virtual Gamepad -->
-  <gamepad (onSettingsClick)="openSettings()"></gamepad>
+  <gamepad *ngIf="showGamepad" (onSettingsClick)="openSettings()"></gamepad>
 </ion-content>
