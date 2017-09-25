@@ -8,6 +8,7 @@ import { IonicStorageModule } from '@ionic/storage';
 
 import { MyApp } from './app.component';
 import { SettingsProvider } from '../providers/settings/settings';
+import { PicoDbProvider } from '../providers/pico-db/pico-db';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { SettingsProvider } from '../providers/settings/settings';
     SplashScreen,
     ScreenOrientation,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
-    SettingsProvider
+    SettingsProvider,
+    PicoDbProvider
   ]
 })
 export class AppModule {}
