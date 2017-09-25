@@ -17,7 +17,8 @@ export class SettingsProvider {
   constructor(private storage: Storage) {
     // Set our default settings
     this.settings = {
-      sound: true
+      sound: true,
+      bgColor: '#030303'
     }
 
     // Get our true settings

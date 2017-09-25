@@ -54,6 +54,7 @@
         "ionic-angular": "3.6.1",
         "ionic-plugin-keyboard": "^2.2.1",
         "ionicons": "3.0.0",
+        "ngx-color-picker": "^4.3.3",
         "rxjs": "5.4.0",
         "sass-media-queries": "^1.0.3",
         "sass-theme-defaults": "^1.0.2",

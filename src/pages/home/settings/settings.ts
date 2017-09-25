@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
 import { IonicPage, ViewController, NavParams } from 'ionic-angular';
-import { Storage } from '@ionic/storage';
+
 import { SettingsProvider } from '../../../providers/settings/settings';
 
 // Settings Modal
 // How to: https://github.com/PaulHalliday/Ionic-3-Modal-Example/tree/master/src/pages
 @IonicPage()
 @Component({
-  templateUrl: 'settings.html',
-  providers: [SettingsProvider]
+  templateUrl: 'settings.html'
 })
 export class SettingsModal {
 
@@ -20,6 +19,11 @@ export class SettingsModal {
  // Function on sound click
  soundChange() {
    (<any>window).Module.pico8ToggleSound();
+   this.settingsProvider.save();
+ }
+
+ colorChange(event) {
+   this.settingsProvider.settings.bgColor = event;
    this.settingsProvider.save();
  }
 

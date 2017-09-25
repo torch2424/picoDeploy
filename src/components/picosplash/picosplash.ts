@@ -9,8 +9,7 @@ import { SettingsProvider } from '../../providers/settings/settings';
  */
 @Component({
   selector: 'picosplash',
-  templateUrl: 'picosplash.html',
-  providers: [SettingsProvider]
+  templateUrl: 'picosplash.html'
 })
 export class PicosplashComponent {
 

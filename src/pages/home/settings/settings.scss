@@ -6,7 +6,7 @@
   background-color: $transparent-75;
 }
 
-.settings__container .item-md {
+.settings__container .item {
   color: $inverse;
   background-color: transparent;
 }
@@ -17,5 +17,35 @@
 
   .scroll-content {
     padding: 10px;
+  }
+
+  .color-picker {
+    .hsla-text, .rgba-text, .hex-text, .type-policy {
+      display: none !important;
+    }
+
+    .box {
+      padding: 0px !important;
+    }
+  }
+}
+
+.fake-ion-item {
+  margin-left: 16px;
+  padding-top: 11px;
+  padding-bottom: 11px;
+  padding-right: 8px;
+
+  border-bottom: 0.55px solid #c8c7cc;
+
+  display: flex;
+  align-items: center;
+
+  .fake-ion-item__label {
+
+  }
+
+  .fake-ion-item__content {
+    margin-left: auto;
   }
 }

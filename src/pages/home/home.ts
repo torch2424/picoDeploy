@@ -14,7 +14,10 @@ export class HomePage {
   showGamepad: boolean
 
 
-  constructor(platform: Platform, public modalCtrl: ModalController, public navCtrl: NavController, public settingsProvider: SettingsProvider) {
+  constructor(platform: Platform,
+    public modalCtrl: ModalController,
+    public navCtrl: NavController,
+    public settingsProvider: SettingsProvider) {
     if(platform.is('cordova')) {
       this.showGamepad = true;
     } else {

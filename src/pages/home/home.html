@@ -6,7 +6,7 @@
   </ion-navbar>
 </ion-header> -->
 
-<ion-content class="home">
+<ion-content class="home" [ngStyle]="{ 'background-color': this.settingsProvider.settings.bgColor }">
   <!-- Electron Testing Code -->
   <!-- <div>
     We are using node <script>document.write(process.versions.node)</script>,

@@ -16,5 +16,23 @@
       <ion-toggle [(ngModel)]="settingsProvider.settings.sound" (ngModelChange)="soundChange($event)"></ion-toggle>
     </ion-item>
 
+    <!-- Can't be place din ion-item, will break the color picker -->
+    <!-- Faking the ion-item look -->
+    <div class="fake-ion-item">
+      <div class="fake-ion-item__label">Background Color</div>
+      <div class="fake-ion-item__content">
+        <input [colorPicker]="settingsProvider.settings.bgColor"
+          [style.backgroundColor]="settingsProvider.settings.bgColor"
+          [value]="settingsProvider.settings.bgColor"
+          [cpPosition]="'left'"
+          (colorPickerChange)="colorChange($event)" />
+      </div>
+    </div>
+
+    <ion-item>
+      <ion-label>Stretch</ion-label>
+      <ion-toggle [(ngModel)]="settingsProvider.settings.stretch" (ngModelChange)="stretchChange($event)"></ion-toggle>
+    </ion-item>
+
   </ion-list>
 </ion-content>
