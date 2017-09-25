@@ -28,6 +28,26 @@
       padding: 0px !important;
     }
   }
+
+  .ion-item--no-padding ion-label {
+    margin: 0px !important;
+  }
+
+  .expandable-list-item, .expandable-list-item * {
+    color: $inverse !important;
+    background-color: transparent !important;
+    padding: 0px !important;
+  }
+
+  .expandable-list-divider {
+    margin: 0px !important;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .expandable-list-item__dropdown-chevron-line1, .expandable-list-item__dropdown-chevron-line2 {
+    stroke: $inverse !important;
+  }
 }
 
 .fake-ion-item {

@@ -1,4 +1,5 @@
 import { Component, Output, EventEmitter } from '@angular/core';
+import { SettingsProvider } from '../../providers/settings/settings';
 
 /**
  * Generated class for the CartComponent component.
@@ -16,7 +17,7 @@ export class CartComponent {
 
   canvas: HTMLCanvasElement;
 
-  constructor() {
+  constructor(private settingsProvider: SettingsProvider) {
   }
 
   ngOnInit() {

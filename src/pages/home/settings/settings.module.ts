@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { ColorPickerModule } from 'ngx-color-picker';
+import { ExpandableListModule } from 'angular2-expandable-list';
 
 import { SettingsModal } from './settings';
 @NgModule({
@@ -9,6 +10,7 @@ import { SettingsModal } from './settings';
   ],
   imports: [
     ColorPickerModule,
+    ExpandableListModule,
     IonicPageModule.forChild(SettingsModal)
   ]
 })

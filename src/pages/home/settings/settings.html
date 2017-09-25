@@ -10,7 +10,6 @@
 
 <ion-content class="settings__container">
   <ion-list>
-
     <ion-item>
       <ion-label>Sound</ion-label>
       <ion-toggle [(ngModel)]="settingsProvider.settings.sound" (ngModelChange)="soundChange($event)"></ion-toggle>
@@ -31,8 +30,27 @@
 
     <ion-item>
       <ion-label>Stretch</ion-label>
-      <ion-toggle [(ngModel)]="settingsProvider.settings.stretch" (ngModelChange)="stretchChange($event)"></ion-toggle>
+      <ion-toggle [(ngModel)]="settingsProvider.settings.stretch" (ngModelChange)="settingsProvider.save()"></ion-toggle>
     </ion-item>
 
+    <ion-item class="ion-item--no-padding">
+      <!-- Credits Section -->
+      <expandable-list>
+        <expandable-list-item>
+          <span title>Credits</span>
+          <div item> <!-- Your Credits Here --> </div>
+          <expandable-list-divider></expandable-list-divider>
+          <div item>Aaron Turner (@torch2424): Author of Pico Deploy</div>
+          <div item>Lexaloffle, the Pico-8 team</div>
+          <div item>the Pico-8 communitty</div>
+          <div item>The Ionic Team</div>
+          <div item>The Electron Team</div>
+          <div item>The Node.js Team</div>
+          <div item>@andreasonny83: angular2-expandable-list</div>
+          <div item>@zefoy: ngx-color-picker</div>
+          <div item>Google Material Icons: https://material.io/icons/</div>
+        </expandable-list-item>
+      </expandable-list>
+    </ion-item>
   </ion-list>
 </ion-content>
