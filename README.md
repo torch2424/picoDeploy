@@ -4,6 +4,8 @@ Using Electron and [Electron Builder](https://github.com/electron-userland/elect
 
 May only need the cart.js. Convert the Cart.html into an angular component and be chilling. And be sure to include the cart.js in index.html
 
+Deploying with Ionic: https://ionicframework.com/docs/intro/deploying/
+
 
 This is a starter template for [Ionic](http://ionicframework.com/docs/) projects.
 

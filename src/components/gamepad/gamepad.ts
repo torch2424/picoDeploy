@@ -41,6 +41,9 @@ export class GamepadComponent {
       },
       settingsBtn: {
         element: document.getElementById('settingsBtn'),
+      },
+      pauseBtn: {
+        element: document.getElementById('pauseBtn'),
       }
     }
 
@@ -153,6 +156,11 @@ export class GamepadComponent {
       // Handle Settings Button
       if(event.target.id === 'settingsBtn') {
         this.onSettingsClick.emit(true);
+      }
+
+      // Handle Pause Button
+      if(event.target.id === 'pauseBtn') {
+        (<any>window).Module.pico8TogglePaused();
       }
     } else {
 
