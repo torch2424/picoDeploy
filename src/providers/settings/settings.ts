@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 
+const picoDeployConfig = require('../../../picoDeployConfig.json');
+
 /*
   Generated class for the SettingsProvider provider.
 
@@ -21,6 +23,9 @@ export class SettingsProvider {
       bgColor: '#030303',
       stretch: false
     }
+
+    // Apply the default passed in by picoDeployConfig
+    this.settings = Object.assign({}, this.settings, picoDeployConfig.defaultSettings);
 
     // Get our true settings
     Object.keys(this.settings).forEach(settingKey => {

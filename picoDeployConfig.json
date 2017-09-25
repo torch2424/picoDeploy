@@ -1,4 +1,16 @@
 {
+  "cart": {
+    "cartName": "cart.js"
+  },
+  "picosplash": {
+    "enable": true,
+    "splashImage": "splash.gif"
+  },
+  "defaultSettings": {
+    "sound": true,
+    "bgColor": "#030303",
+    "stretch": false
+  },
   "dbWatcher": {
     "enable": true,
     "cartDataName": "YOUR_STRING_PASSED_TO_cartdata()",

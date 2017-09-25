@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { SettingsProvider } from '../../providers/settings/settings';
 
+const picoDeployConfig = require('../../../picoDeployConfig.json');
+
 /**
  * Generated class for the PicosplashComponent component.
  *
@@ -14,15 +16,23 @@ import { SettingsProvider } from '../../providers/settings/settings';
 export class PicosplashComponent {
 
   initializingCart: boolean
+  splashImage: string
   cartMuted: boolean
 
   constructor(private settingsProvider: SettingsProvider) {
-    this.initializingCart = true;
+    this.initializingCart = false;
+    this.splashImage = ""
+    if(picoDeployConfig.picosplash.enable) {
+      this.initializingCart = true;
+      this.splashImage = picoDeployConfig.picosplash.splashImage
+    }
     this.cartMuted = false;
   }
 
   ngOnInit() {
-    this.listenForCartRun();
+    if(picoDeployConfig.picosplash.enable) {
+      this.listenForCartRun();
+    }
   }
 
   // Function to ping the window cart Module,

@@ -1,6 +1,8 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { SettingsProvider } from '../../providers/settings/settings';
 
+const picoDeployConfig = require('../../../picoDeployConfig.json');
+
 /**
  * Generated class for the CartComponent component.
  *
@@ -63,7 +65,7 @@ export class CartComponent {
 
     // Lastly, load the cart
     const cartScript = document.createElement('script');
-    cartScript.setAttribute('src', 'cart/cart.js');
+    cartScript.setAttribute('src', `cart/${picoDeployConfig.cart.cartName}`);
     cartScript.setAttribute('type', 'text/javascript');
     document.body.appendChild(cartScript);
   }

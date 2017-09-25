@@ -8,11 +8,14 @@ const picoDeployConfig = require('../../../picoDeployConfig.json');
   See https://angular.io/guide/dependency-injection for more info on providers
   and Angular DI.
 */
+// Simple Pub/Sub Listener for changes on the Pico 8 IndexedDB
 @Injectable()
 export class PicoDbProvider {
 
   idbKeyval: any
   cartDataKey: string
+  currentValue: any
+  subscribers: any
 
   constructor() {
 
@@ -24,9 +27,10 @@ export class PicoDbProvider {
     // Set our defaults
     const dbName = '/user_data';
     const objectStoreName = 'FILE_DATA';
-    const cartDataName = "nocomplygames_letsgetdismoney_v1";
+    const cartDataName = picoDeployConfig.dbWatcher.cartDataNameDebug;
     const cartDataKey = `/user_data/cdata/${cartDataName}.p8d.txt`;
     this.cartDataKey = cartDataKey;
+    this.subscribers = {};
 
 
     //pico 8 idb version is 21
@@ -53,9 +57,50 @@ export class PicoDbProvider {
         console.warn('PicoDbProvider: The Returned value for the cart data came undefined. Either the cart data has not been created, or there is an invalid cartDataKey.');
         return;
       }
+      console.log(val);
+      this.currentValue = val.contents;
 
-      console.log('PicoDbProvider: ', val);
+      this.listen();
     });
+  }
+
+  listen() {
+    setTimeout(() => {
+
+      // Check if the value changes
+      this.idbKeyval.get(this.cartDataKey).then(val => {
+
+        // Check for differences between the two arrays
+        const diff = this.currentValue.filter(x => val.contents.indexOf(x) < 0);
+        if(diff.length > 0) {
+          // Save the new current value
+          this.currentValue = val.contents;
+
+          // Publish to our subscribers
+          this.publish();
+        }
+        // Continue Listening
+        this.listen();
+      });
+    }, 3500);
+  }
+
+  get() {
+    return this.currentValue;
+  }
+
+  publish() {
+    Object.keys(this.subscribers).forEach(subscriberKey => {
+      this.subscribers[subscriberKey](this.currentValue);
+    });
+  }
+
+  subscribe(key, callback) {
+    this.subscribers[key] = callback;
+  }
+
+  unsubscribe(key) {
+    delete this.subscribers[key];
   }
 
 }
