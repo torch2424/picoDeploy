@@ -14,7 +14,7 @@ export class HomePage {
   }
 
   ngOnInit() {
-    this.settingsModal = this.modalCtrl.create('SettingsModal', { userId: 8675309 });
+    this.settingsModal = this.modalCtrl.create('SettingsModal');
   }
 
   openSettings() {

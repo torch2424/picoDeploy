@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SettingsProvider } from '../../providers/settings/settings';
 
 /**
  * Generated class for the PicosplashComponent component.
@@ -8,14 +9,15 @@ import { Component } from '@angular/core';
  */
 @Component({
   selector: 'picosplash',
-  templateUrl: 'picosplash.html'
+  templateUrl: 'picosplash.html',
+  providers: [SettingsProvider]
 })
 export class PicosplashComponent {
 
   initializingCart: boolean
   cartMuted: boolean
 
-  constructor() {
+  constructor(private settingsProvider: SettingsProvider) {
     this.initializingCart = true;
     this.cartMuted = false;
   }
@@ -46,7 +48,7 @@ export class PicosplashComponent {
       // Toggle sound back on in a second
       setTimeout(() => {
         // Toggle sound back on
-        if(this.cartMuted) {
+        if(this.cartMuted && this.settingsProvider.settings.sound) {
           (<any>window).Module.pico8ToggleSound();
         }
 

@@ -3,12 +3,17 @@
 }
 
 .settings__header, .settings__header .toolbar-background {
-  background-color: $transparent-50;
+  background-color: $transparent-75;
+}
+
+.settings__container .item-md {
+  color: $inverse;
+  background-color: transparent;
 }
 
 .settings__container {
   color: $inverse;
-  background-color: $transparent-50;
+  background-color: $transparent-75;
 
   .scroll-content {
     padding: 10px;
