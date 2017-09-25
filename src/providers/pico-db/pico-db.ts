@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 const idb = require('idb');
+const picoDeployConfig = require('../../../picoDeployConfig.json');
 
 /*
   Generated class for the PicoDbProvider provider.
@@ -11,12 +12,21 @@ const idb = require('idb');
 export class PicoDbProvider {
 
   idbKeyval: any
+  cartDataKey: string
 
   constructor() {
-    console.log('Hello PicoDbProvider Provider');
+
+    // Enable or disable the indexedDB provider
+    if(!picoDeployConfig.dbWatcher.enable) {
+      return;
+    }
+
     // Set our defaults
     const dbName = '/user_data';
     const objectStoreName = 'FILE_DATA';
+    const cartDataName = "nocomplygames_letsgetdismoney_v1";
+    const cartDataKey = `/user_data/cdata/${cartDataName}.p8d.txt`;
+    this.cartDataKey = cartDataKey;
 
 
     //pico 8 idb version is 21
@@ -24,56 +34,27 @@ export class PicoDbProvider {
       //TODO: Handle Upgrade
     });
 
+    // Only need the get functionality of idbKeyval
+    // https://github.com/jakearchibald/idb
     this.idbKeyval = {
       get(key) {
         return dbPromise.then(db => {
-          return db.transaction(objectStoreName)
-            .objectStore(objectStoreName).get(key);
-        });
-      },
-      set(key, val) {
-        return dbPromise.then(db => {
-          const tx = db.transaction(objectStoreName, 'readwrite');
-          tx.objectStore(objectStoreName).put(val, key);
-          return tx.complete;
-        });
-      },
-      delete(key) {
-        return dbPromise.then(db => {
-          const tx = db.transaction(objectStoreName, 'readwrite');
-          tx.objectStore(objectStoreName).delete(key);
-          return tx.complete;
-        });
-      },
-      clear() {
-        return dbPromise.then(db => {
-          const tx = db.transaction(objectStoreName, 'readwrite');
-          tx.objectStore(objectStoreName).clear();
-          return tx.complete;
-        });
-      },
-      keys() {
-        return dbPromise.then(db => {
-          const tx = db.transaction(objectStoreName);
-          const keys = [];
-          const store = tx.objectStore(objectStoreName);
-
-          // This would be store.getAllKeys(), but it isn't supported by Edge or Safari.
-          // openKeyCursor isn't supported by Safari, so we fall back
-          (store.iterateKeyCursor || store.iterateCursor).call(store, cursor => {
-            if (!cursor) return;
-            keys.push(cursor.key);
-            cursor.continue();
-          });
-
-          return tx.complete.then(() => keys);
+          if(db.objectStoreNames.contains(objectStoreName)) {
+            return db.transaction(objectStoreName)
+              .objectStore(objectStoreName).get(key);
+          }
+          return undefined;
         });
       }
     };
 
-    this.idbKeyval.get('/user_data/cdata/nocomplygames_letsgetdismoney_v1.p8d.txt').then(val => {
-      // TODO: Watch the value for changes
-      console.log('ayyee: ', val);
+    this.idbKeyval.get(cartDataKey).then(val => {
+      if(val === undefined) {
+        console.warn('PicoDbProvider: The Returned value for the cart data came undefined. Either the cart data has not been created, or there is an invalid cartDataKey.');
+        return;
+      }
+
+      console.log('PicoDbProvider: ', val);
     });
   }
 

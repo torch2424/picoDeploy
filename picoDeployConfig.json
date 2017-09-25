@@ -1,0 +1,7 @@
+{
+  "dbWatcher": {
+    "enable": true,
+    "cartDataName": "YOUR_STRING_PASSED_TO_cartdata()",
+    "cartDataNameDebug": "nocomplygames_letsgetdismoney_v1"
+  }
+}
