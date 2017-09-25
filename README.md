@@ -6,6 +6,8 @@ May only need the cart.js. Convert the Cart.html into an angular component and b
 
 Deploying with Ionic: https://ionicframework.com/docs/intro/deploying/
 
+crosswalk for performance: https://www.techiediaries.com/mobiledev/boosting-ionic2-apps-performance-with-crosswalk/
+
 
 This is a starter template for [Ionic](http://ionicframework.com/docs/) projects.
 
