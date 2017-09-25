@@ -11,19 +11,16 @@ const idb = require('idb');
 export class PicoDbProvider {
 
   idbKeyval: any
-  dbName: string
-  objectStoreName: string
 
   constructor() {
-    console.log('Hello PicoDbProvider Provider', this.dbName);
+    console.log('Hello PicoDbProvider Provider');
     // Set our defaults
-    this.dbName = '/user_data';
-    this.objectStoreName = 'FILE_DATA';
-    const objectStoreName = this.objectStoreName;
+    const dbName = '/user_data';
+    const objectStoreName = 'FILE_DATA';
 
 
     //pico 8 idb version is 21
-    const dbPromise = idb.open(this.dbName, 21, upgradeDB => {
+    const dbPromise = idb.open(dbName, 21, upgradeDB => {
       //TODO: Handle Upgrade
     });
 
