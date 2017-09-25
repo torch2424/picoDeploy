@@ -24,6 +24,10 @@ export class MyApp {
       if(platform.is('cordova')) {
         screenOrientation.lock(screenOrientation.ORIENTATIONS.LANDSCAPE);
       }
+
+      if((<any>window).process) {
+        console.log('Electron Process: ', (<any>window).process);
+      }
     });
   }
 }
