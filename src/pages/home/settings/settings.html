@@ -24,7 +24,8 @@
           [style.backgroundColor]="settingsProvider.settings.bgColor"
           [value]="settingsProvider.settings.bgColor"
           [cpPosition]="'left'"
-          (colorPickerChange)="colorChange($event)" />
+          (colorPickerChange)="colorChange($event)"
+          readonly />
       </div>
     </div>
 
@@ -38,12 +39,14 @@
       <expandable-list>
         <expandable-list-item>
           <span title>Credits</span>
+          <expandable-list-divider></expandable-list-divider>
           <div item> <!-- Your Credits Here --> </div>
           <expandable-list-divider></expandable-list-divider>
           <div item>Aaron Turner (@torch2424): Author of Pico Deploy</div>
           <div item>Lexaloffle, the Pico-8 team</div>
           <div item>Zep, the Pico-8 dude, and the demo carts they helped to create</div>
           <div item>the Pico-8 communitty</div>
+          <div item>The Angular Team</div>
           <div item>The Ionic Team</div>
           <div item>The Electron Team</div>
           <div item>The Node.js Team</div>

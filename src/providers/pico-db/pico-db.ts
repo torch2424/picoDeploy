@@ -27,7 +27,7 @@ export class PicoDbProvider {
     // Set our defaults
     const dbName = '/user_data';
     const objectStoreName = 'FILE_DATA';
-    const cartDataName = picoDeployConfig.dbWatcher.cartDataNameDebug;
+    const cartDataName = picoDeployConfig.dbWatcher.cartDataName;
     const cartDataKey = `/user_data/cdata/${cartDataName}.p8d.txt`;
     this.cartDataKey = cartDataKey;
     this.subscribers = {};

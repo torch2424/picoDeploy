@@ -12,8 +12,7 @@
     "stretch": false
   },
   "dbWatcher": {
-    "enable": true,
-    "cartDataName": "YOUR_STRING_PASSED_TO_cartdata()",
-    "cartDataNameDebug": "nocomplygames_letsgetdismoney_v1"
+    "enable": false,
+    "cartDataName": "YOUR_STRING_PASSED_TO_cartdata()"
   }
 }
