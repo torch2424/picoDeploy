@@ -8,7 +8,7 @@
   },
   "defaultSettings": {
     "sound": true,
-    "bgColor": "#030303",
+    "bgColor": "#272727",
     "stretch": false
   },
   "dbWatcher": {
