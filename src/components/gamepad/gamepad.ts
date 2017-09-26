@@ -127,11 +127,15 @@ export class GamepadComponent {
 
         // Find if left or right from width, vice versa for height
         if(isHorizontal) {
-          const isLeft = touchX < (this.buttons.dpad.rect.width / 2);
-          if(isLeft) {
-            this.buttons.dpad.pressed.left = true;
-          } else {
-            this.buttons.dpad.pressed.right = true;
+          // Add a horizontal dead zone
+          const deadzoneSize = this.buttons.dpad.rect.width / 20;
+          if(Math.abs((this.buttons.dpad.rect.width / 2) - touchX) > deadzoneSize) {
+            const isLeft = touchX < (this.buttons.dpad.rect.width / 2);
+            if(isLeft) {
+              this.buttons.dpad.pressed.left = true;
+            } else {
+              this.buttons.dpad.pressed.right = true;
+            }
           }
         } else {
           const isUp = touchY < (this.buttons.dpad.rect.height / 2);

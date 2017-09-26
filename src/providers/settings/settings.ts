@@ -20,7 +20,7 @@ export class SettingsProvider {
     // Set our default settings
     this.settings = {
       sound: true,
-      bgColor: '#030303',
+      bgColor: "#272727",
       stretch: false
     }
 
