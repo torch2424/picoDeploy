@@ -26,6 +26,8 @@ tmp/
 temp/
 hooks/
 platforms/
+# Added by me
+!platforms/android/AndroidManifest.xml
 plugins/
 plugins/android.json
 plugins/ios.json
