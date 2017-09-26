@@ -3,5 +3,6 @@
   *ngIf="initializingCart"
   [style.backgroundColor]="settingsProvider.settings.bgColor">
 
-  <img *ngIf="splashImage" class="picosplash__image" src="assets/picosplash/{{splashImage}}">
+  <!-- TODO: Some weird stuff happened where this needs to be camelcased even though it isnt -->
+  <img *ngIf="splashImage" class="picosplash__image" src="assets/picoSplash/{{splashImage}}">
 </div>
