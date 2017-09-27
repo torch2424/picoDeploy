@@ -4,6 +4,8 @@ Using Electron and [Electron Builder](https://github.com/electron-userland/elect
 
 Play with the config.xml: https://cordova.apache.org/docs/en/latest/config_ref/
 
+Plugins can have settings in config.xml, splashscreen editing: https://cordova.apache.org/docs/en/latest/reference/cordova-plugin-splashscreen/
+
 May only need the cart.js. Convert the Cart.html into an angular component and be chilling. And be sure to include the cart.js in index.html
 
 Deploying with Ionic: https://ionicframework.com/docs/intro/deploying/
