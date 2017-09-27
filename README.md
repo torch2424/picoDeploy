@@ -1,6 +1,8 @@
 # Notes
 
-Using Electron and [Electron Builder](https://github.com/electron-userland/electron-builder). Simply Follow the quick setup guide for electron builder for help
+Using Electron and [Electron Builder](https://github.com/electron-userland/electron-builder). Simply Follow the quick setup guide for electron builder for help.
+
+Play with the config.xml: https://cordova.apache.org/docs/en/latest/config_ref/
 
 May only need the cart.js. Convert the Cart.html into an angular component and be chilling. And be sure to include the cart.js in index.html
 
