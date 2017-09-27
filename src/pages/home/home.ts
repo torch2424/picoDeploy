@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Platform, ModalController, NavController, IonicPage } from 'ionic-angular';
+import { ModalController, NavController, IonicPage } from 'ionic-angular';
 import { SettingsProvider } from '../../providers/settings/settings';
 
 @IonicPage()
@@ -11,19 +11,11 @@ export class HomePage {
 
   settingsModal: any
   settingsModalShown: boolean
-  showGamepad: boolean
 
 
-  constructor(platform: Platform,
-    public modalCtrl: ModalController,
+  constructor(public modalCtrl: ModalController,
     public navCtrl: NavController,
     public settingsProvider: SettingsProvider) {
-    if(platform.is('cordova')) {
-      this.showGamepad = true;
-    } else {
-      this.showGamepad = false;
-    }
-
     this.settingsModalShown = false;
   }
 

@@ -1,6 +1,8 @@
 <!-- Generated template for the GamepadComponent component -->
-<div>
-  {{currentTouch}}
+<div [hidden]="!showVirtualGamepad">
+  <div class="current-touch">
+    {{currentTouch}}
+  </div>
 
   <!-- Pause Button -->
   <img class="pauseBtn" id="pauseBtn" src="assets/gamepad/materialPause.svg">

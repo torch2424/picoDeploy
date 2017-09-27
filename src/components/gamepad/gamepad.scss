@@ -18,6 +18,10 @@ gamepad {
     display: none;
   }
 
+  .current-touch {
+    color: red;
+  }
+
   .pauseBtn {
     position: absolute;
     top: 0;

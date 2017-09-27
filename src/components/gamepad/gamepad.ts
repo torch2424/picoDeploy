@@ -1,4 +1,5 @@
 import { Component, Output, EventEmitter } from '@angular/core';
+import { Platform } from 'ionic-angular';
 
 /**
  * Generated class for the GamepadComponent component.
@@ -15,11 +16,30 @@ export class GamepadComponent {
 
   buttons: any
   currentTouch: any
+  showVirtualGamepad: boolean
 
-  constructor() {
+  constructor(platform: Platform) {
+    // Set up our buttons
+    (<any>window).pico8_buttons = [0,0,0,0,0,0,0,0];
+    if(platform.is('cordova')) {
+      this.showVirtualGamepad = true;
+    } else {
+      this.showVirtualGamepad = false;
+      // Also, Add the gamepad script
+      const picoGamepadScript = document.createElement('script');
+      picoGamepadScript.setAttribute('src', 'assets/3pLibs/pico8gamepad/pico8gamepad.js');
+      picoGamepadScript.setAttribute('type', 'text/javascript');
+      document.body.appendChild(picoGamepadScript);
+    }
   }
 
   ngOnInit() {
+
+    // Check if we are showing the gamepad. If not, simply return here
+    if(!this.showVirtualGamepad) {
+      return;
+    }
+
     // Get our buttons, and their position
     this.buttons = {
       dpad: {
@@ -47,11 +67,11 @@ export class GamepadComponent {
       }
     }
 
-    this.updateGamepadRect();
     // Add a resize listen to update the gamepad rect on resize
     window.addEventListener("resize", () => {
       this.updateGamepadRect();
     });
+    this.updateGamepadRect();
 
     // Loop through our buttons and add touch events
     Object.keys(this.buttons).forEach((button) => {
@@ -96,7 +116,7 @@ export class GamepadComponent {
     event.stopPropagation();
     event.preventDefault();
 
-    //this.debugCurrentTouch(event)
+    //this.debugCurrentTouch(event);
 
     // Get our key event info
     if(event.type === "touchstart" ||
@@ -197,27 +217,17 @@ export class GamepadComponent {
 
   // Our Pico 8 Gamepad with help from: https://github.com/krajzeg/pico8gamepad
   updatePico8Controller() {
+    (<any>window).pico8_buttons[0] = 0;
+
     let bitmask = 0;
 
     // Go through all of our buttons for the bitmask
-    if(this.buttons.dpad.pressed.left) {
-      bitmask |= 1;
-    }
-    if(this.buttons.dpad.pressed.right) {
-      bitmask |= 2;
-    }
-    if(this.buttons.dpad.pressed.up) {
-      bitmask |= 4;
-    }
-    if(this.buttons.dpad.pressed.down) {
-      bitmask |= 8;
-    }
-    if(this.buttons.squareBtn.pressed) {
-      bitmask |= 16;
-    }
-    if(this.buttons.crossBtn.pressed) {
-      bitmask |= 32;
-    }
+    if(this.buttons.dpad.pressed.left) bitmask |= 1;
+    if(this.buttons.dpad.pressed.right) bitmask |= 2;
+    if(this.buttons.dpad.pressed.up) bitmask |= 4;
+    if(this.buttons.dpad.pressed.down) bitmask |= 8;
+    if(this.buttons.squareBtn.pressed) bitmask |= 16;
+    if(this.buttons.crossBtn.pressed) bitmask |= 32;
 
     // Set for player one
     (<any>window).pico8_buttons[0] |= bitmask;
