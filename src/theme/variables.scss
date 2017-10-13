@@ -5,6 +5,21 @@
 // roboto, and noto sans fonts
 $font-path: "../assets/fonts";
 
+// Import our fonts
+// https://www.lexaloffle.com/bbs/?tid=3760
+@font-face {
+	font-family: "pico8";
+	src: url($font-path + "/PICO-8MonoUpper.ttf") format("truetype");
+}
+
+.pico-font {
+  font-family: 'pico8', "Roboto", "Helvetica Neue", sans-serif !important;
+}
+
+html * {
+  @extend .pico-font;
+}
+
 
 // The app direction is used to include
 // rtl styles in your app. For more info, please see:
