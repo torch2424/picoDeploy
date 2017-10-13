@@ -1,4 +1,7 @@
 import { Component, Output, EventEmitter } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { Platform } from 'ionic-angular';
+
 import { SettingsProvider } from '../../providers/settings/settings';
 
 const picoDeployConfig = require('../../../picoDeployConfig.json');
@@ -18,8 +21,27 @@ export class CartComponent {
   @Output() onOption: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   canvas: HTMLCanvasElement;
+  platform: Platform;
+  private onResumeSubscription: Subscription;
+  private onPauseSubscription: Subscription;
 
-  constructor(private settingsProvider: SettingsProvider) {
+  constructor(platformImport: Platform, private settingsProvider: SettingsProvider) {
+    // Subscribe to pause and resume events
+    // to pause the cart from running to save people's phones
+    this.platform = platformImport;
+    if(this.platform.is('cordova')) {
+      this.onPauseSubscription = this.platform.pause.subscribe(() => {
+        if((<any>window).Module && (<any>window).Module.pico8SetPaused) {
+            (<any>window).Module.pico8SetPaused(true);
+        }
+      });
+
+      this.onResumeSubscription = this.platform.pause.subscribe(() => {
+       if((<any>window).Module && (<any>window).Module.pico8SetPaused) {
+           (<any>window).Module.pico8SetPaused(false);
+       }
+      });
+    }
   }
 
   ngOnInit() {
@@ -63,10 +85,20 @@ export class CartComponent {
       }
     }, false);
 
-    // Lastly, load the cart
+    // Lastly, Load the cart
     const cartScript = document.createElement('script');
     cartScript.setAttribute('src', `cart/${picoDeployConfig.cart.cartName}`);
     cartScript.setAttribute('type', 'text/javascript');
     document.body.appendChild(cartScript);
+  }
+
+  ngOnDestroy() {
+    if(this.platform.is('cordova') &&
+      this.onResumeSubscription &&
+      this.onPauseSubscription) {
+      // always unsubscribe your subscriptions to prevent leaks
+      this.onResumeSubscription.unsubscribe();
+      this.onPauseSubscription.unsubscribe();
+    }
   }
 }
