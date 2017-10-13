@@ -39,6 +39,12 @@
     padding: 0px !important;
   }
 
+  .expandable-list-item div[item] {
+    width: 100%;
+    word-break: break-word;
+    white-space: normal;
+  }
+
   .expandable-list-divider {
     margin: 0px !important;
     margin-top: 10px;
@@ -62,7 +68,7 @@
   align-items: center;
 
   .fake-ion-item__label {
-
+    line-height: 2;
   }
 
   .fake-ion-item__content {
