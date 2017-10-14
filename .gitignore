@@ -3,6 +3,9 @@
 
 package-lock.json
 
+# Our dist directory for app builds
+dist/
+
 *~
 *.sw[mnpcod]
 *.log
@@ -20,7 +23,6 @@ npm-debug.log*
 .tmp/
 .versions/
 coverage/
-dist/
 node_modules/
 tmp/
 temp/

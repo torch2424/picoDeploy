@@ -17,12 +17,16 @@
         "android:build": "npm run cart && ionic cordova build android --prod",
         "android:serve": "npm run cart && ionic cordova run android --prod",
         "android:release": "npm run cart && ionic cordova build android --prod --release",
-        "electron:build": "npm run cart &&  npm run ionic:build --prod && electron-builder",
-        "electron:serve": "npm run cart &&  npm run ionic:build --prod && ./node_modules/.bin/electron .",
+        "electron:build": "export DEV=\"false\" && npm run cart &&  npm run ionic:build --prod && electron-builder",
+        "electron:serve": "export DEV=\"true\" && npm run cart &&  npm run ionic:build --prod && ./node_modules/.bin/electron .",
         "electron:pack": "npm run cart &&  npm run ionic:build --prod && electron-builder --dir"
     },
     "build": {
         "appId": "com.example.picoDeploy",
+        "productName": "picoDeploy",
+        "directories": {
+            "buildResources": "resources"
+        },
         "mac": {
             "category": "public.app-category.games"
         }
@@ -67,7 +71,7 @@
     "devDependencies": {
         "@ionic/app-scripts": "2.1.4",
         "electron": "^1.7.6",
-        "electron-builder": "^19.27.7",
+        "electron-builder": "^19.30.4",
         "typescript": "2.3.4"
     },
     "cordova": {
