@@ -16,10 +16,6 @@ $font-path: "../assets/fonts";
   font-family: 'pico8', "Roboto", "Helvetica Neue", sans-serif !important;
 }
 
-html * {
-  @extend .pico-font;
-}
-
 
 // The app direction is used to include
 // rtl styles in your app. For more info, please see:
