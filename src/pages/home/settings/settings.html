@@ -17,7 +17,7 @@
 
     <!-- Can't be place din ion-item, will break the color picker -->
     <!-- Faking the ion-item look -->
-    <div class="fake-ion-item">
+    <div *ngIf="!hasCartBackgroundMedia" class="fake-ion-item">
       <div class="fake-ion-item__label">Background Color</div>
       <div class="fake-ion-item__content">
         <input [colorPicker]="settingsProvider.settings.backgroundColor"

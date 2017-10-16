@@ -6,7 +6,7 @@
     "enable": true,
     "splashMedia": "assets/picoSplash/splash.gif"
   },
-  "backgroundMedia": "assets/picoMedia/picostars.mp4",
+  "backgroundMedia": false,
   "defaultSettings": {
     "sound": true,
     "backgroundColor": "#272727",

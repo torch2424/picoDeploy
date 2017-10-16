@@ -3,6 +3,8 @@ import { IonicPage, ViewController, NavParams } from 'ionic-angular';
 
 import { SettingsProvider } from '../../../providers/settings/settings';
 
+const picoDeployConfig = require('../../../../picoDeployConfig.json');
+
 // Settings Modal
 // How to: https://github.com/PaulHalliday/Ionic-3-Modal-Example/tree/master/src/pages
 @IonicPage()
@@ -12,8 +14,15 @@ import { SettingsProvider } from '../../../providers/settings/settings';
 export class SettingsModal {
 
   isOpen: boolean
+  hasCartBackgroundMedia: boolean
 
  constructor(private params: NavParams, private view: ViewController, public settingsProvider: SettingsProvider) {
+
+   // Check if we have cart background media
+   this.hasCartBackgroundMedia = false;
+   if(picoDeployConfig.backgroundMedia) {
+     this.hasCartBackgroundMedia = true;
+   }
  }
 
  // Function on sound click
