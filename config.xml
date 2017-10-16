@@ -14,7 +14,7 @@
     <allow-intent href="geo:*" />
     <preference name="orientation" value="landscape" />
     <preference name="FullScreen" value="true" />
-    <preference name="KeepRunning" value="false" />
+    <preference name="KeepRunning" value="true" />
     <preference name="webviewbounce" value="false" />
     <preference name="UIWebViewBounce" value="false" />
     <preference name="DisallowOverscroll" value="true" />
@@ -81,6 +81,7 @@
         <splash height="480" src="resources/ios/splash/Default~iphone.png" width="320" />
     </platform>
     <allow-navigation href="http://192.168.86.100:8100" />
+    <allow-navigation href="http://192.168.86.108:8100" />
     <engine name="android" spec="^6.2.3" />
     <plugin name="cordova-plugin-console" spec="^1.0.5" />
     <plugin name="cordova-plugin-crosswalk-webview" spec="^2.3.0">

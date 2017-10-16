@@ -24,24 +24,46 @@ export class CartComponent {
   platform: Platform;
   private onResumeSubscription: Subscription;
   private onPauseSubscription: Subscription;
+  private exitTimeout: any;
 
-  constructor(platformImport: Platform, private settingsProvider: SettingsProvider) {
+  constructor(platform: Platform, private settingsProvider: SettingsProvider) {
     // Subscribe to pause and resume events
-    // to pause the cart from running to save people's phones
-    this.platform = platformImport;
-    if(this.platform.is('cordova')) {
-      this.onPauseSubscription = this.platform.pause.subscribe(() => {
-        if((<any>window).Module && (<any>window).Module.pico8SetPaused) {
-            (<any>window).Module.pico8SetPaused(true);
-        }
-      });
+    // to pause the cart from running to save battery
+    this.platform = platform;
+    this.platform.ready().then(() => {
+      // Ensure that the platform is mobile
+      if(this.platform.is('cordova')) {
 
-      this.onResumeSubscription = this.platform.pause.subscribe(() => {
-       if((<any>window).Module && (<any>window).Module.pico8SetPaused) {
-           (<any>window).Module.pico8SetPaused(false);
-       }
-      });
-    }
+        // Subscribe to pause
+        this.onPauseSubscription = this.platform.pause.subscribe(() => {
+          if((<any>window).Module && (<any>window).Module.pico8SetPaused) {
+              // Set paused
+              (<any>window).Module.pico8SetPaused(true);
+
+              // If we have an inactive to exit delay, create the timeout
+              if(picoDeployConfig.inactiveToExitDelayInMilli &&
+              picoDeployConfig.inactiveToExitDelayInMilli >= 0) {
+                this.exitTimeout = setTimeout(() => {
+                  this.platform.exitApp();
+                }, picoDeployConfig.inactiveToExitDelayInMilli);
+              }
+          }
+        });
+
+        // Subscribe to resume
+        this.onResumeSubscription = this.platform.resume.subscribe(() => {
+         if((<any>window).Module && (<any>window).Module.pico8SetPaused) {
+             // Unpause
+             (<any>window).Module.pico8SetPaused(false);
+
+             // Clear the exitTimeout if we set one
+             if(this.exitTimeout) {
+               clearTimeout(this.exitTimeout);
+             }
+         }
+        });
+      }
+    });
   }
 
   ngOnInit() {

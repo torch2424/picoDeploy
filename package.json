@@ -14,9 +14,9 @@
         "serve": "npm run ionic:serve",
         "ionic:build": "npm run cart && ionic-app-scripts build",
         "ionic:serve": "npm run cart &&  ionic-app-scripts serve",
-        "android:build": "npm run cart && ionic cordova build android --prod",
-        "android:serve": "npm run cart && ionic cordova run android --prod",
-        "android:release": "npm run cart && ionic cordova build android --prod --release",
+        "android:run": "npm run cart && ionic cordova run android --prod",
+        "android:serve": "npm run cart && ionic cordova run android --prod --livereload --consolelogs",
+        "android:build": "npm run cart && ionic cordova build android --prod --release",
         "electron:build": "export DEV=\"false\" && npm run cart &&  npm run ionic:build --prod && electron-builder",
         "electron:serve": "export DEV=\"true\" && npm run cart &&  npm run ionic:build --prod && ./node_modules/.bin/electron .",
         "electron:pack": "npm run cart &&  npm run ionic:build --prod && electron-builder --dir"
