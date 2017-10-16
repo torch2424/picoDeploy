@@ -16,15 +16,21 @@ const picoDeployConfig = require('../../../picoDeployConfig.json');
 export class PicosplashComponent {
 
   initializingCart: boolean
-  splashImage: string
+  splashMedia: string
+  splashBackgroundMedia: any
   cartMuted: boolean
 
   constructor(private settingsProvider: SettingsProvider) {
     this.initializingCart = false;
-    this.splashImage = ""
+    this.splashMedia = ""
     if(picoDeployConfig.picosplash.enable) {
       this.initializingCart = true;
-      this.splashImage = picoDeployConfig.picosplash.splashImage
+      this.splashMedia = picoDeployConfig.picosplash.splashMedia
+    }
+    // Also, Get our cart background media, that way we can loop it above the cart and all looks good
+    this.splashBackgroundMedia = false;
+    if(picoDeployConfig.backgroundMedia) {
+      this.splashBackgroundMedia = picoDeployConfig.backgroundMedia;
     }
     this.cartMuted = false;
   }

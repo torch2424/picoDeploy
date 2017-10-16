@@ -1,3 +1,10 @@
 .home {
   position: relative;
+
+  .cart-background {
+    position: fixed;
+    z-index: -10;
+    width: 100%;
+    height: 100%;
+  }
 }

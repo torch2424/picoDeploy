@@ -6,7 +6,7 @@
   </ion-navbar>
 </ion-header> -->
 
-<ion-content class="home" [style.backgroundColor]="settingsProvider.settings.cartBackground.color">
+<ion-content class="home" [style.backgroundColor]="settingsProvider.settings.backgroundColor">
   <!-- Electron Testing Code -->
   <!-- <div>
     We are using node <script>document.write(process.versions.node)</script>,
@@ -18,7 +18,7 @@
   <picosplash></picosplash>
 
   <!-- Our cart background media if we have it -->
-  <picomedia filepath="assets/picomedia/splash.gif"></picomedia>
+  <picomedia *ngIf="cartBackgroundMedia" class="cart-background" [filepath]="cartBackgroundMedia"></picomedia>
 
   <!-- Our Cart Component -->
   <cart (onPause)="pauseGame()" (onOption)="openSettings()"></cart>

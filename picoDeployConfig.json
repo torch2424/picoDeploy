@@ -4,14 +4,12 @@
   },
   "picosplash": {
     "enable": true,
-    "splashMedia": "splash.gif"
+    "splashMedia": "assets/picoSplash/splash.gif"
   },
+  "backgroundMedia": "assets/picoMedia/picostars.mp4",
   "defaultSettings": {
     "sound": true,
-    "cartBackground": {
-      "color": "#272727",
-      "media": false
-    },
+    "backgroundColor": "#272727",
     "stretch": false
   },
   "dbWatcher": {
