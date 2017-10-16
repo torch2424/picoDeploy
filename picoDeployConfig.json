@@ -4,11 +4,14 @@
   },
   "picosplash": {
     "enable": true,
-    "splashImage": "splash.gif"
+    "splashMedia": "splash.gif"
   },
   "defaultSettings": {
     "sound": true,
-    "bgColor": "#272727",
+    "cartBackground": {
+      "color": "#272727",
+      "media": false
+    },
     "stretch": false
   },
   "dbWatcher": {

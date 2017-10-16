@@ -1,0 +1,10 @@
+<!-- Generated template for the PicomediaComponent component -->
+<div class="picomedia">
+  <!-- Image background -->
+  <img *ngIf="isImage" [src]="filepath">
+
+  <!-- Video background -->
+  <video *ngIf="isVideo" autoplay loop muted>
+    <source [src]="filepath">
+  </video>
+</div>

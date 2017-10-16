@@ -23,7 +23,7 @@ export class SettingsModal {
  }
 
  colorChange(event) {
-   this.settingsProvider.settings.bgColor = event;
+   this.settingsProvider.settings.cartBackground.color = event;
    this.settingsProvider.save();
  }
 

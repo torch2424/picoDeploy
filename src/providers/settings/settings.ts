@@ -20,7 +20,10 @@ export class SettingsProvider {
     // Set our default settings
     this.settings = {
       sound: true,
-      bgColor: "#272727",
+      cartBackground: {
+        color: "#272727",
+        media: false
+      },
       stretch: false
     }
 

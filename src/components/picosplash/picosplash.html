@@ -1,7 +1,7 @@
 <!-- Generated template for the PicosplashComponent component -->
 <div class="picosplash__container"
   *ngIf="initializingCart"
-  [style.backgroundColor]="settingsProvider.settings.bgColor">
+  [style.backgroundColor]="settingsProvider.settings.cartBackground.color">
 
   <!-- TODO: Some weird stuff happened where this needs to be camelcased even though it isnt -->
   <img *ngIf="splashImage" class="picosplash__image" src="assets/picoSplash/{{splashImage}}">
