@@ -180,7 +180,7 @@ export class GamepadComponent {
       // Handle Settings Button
       if(event.target.id === 'settingsBtn') {
         // Only want to respect the touch start event
-        if(event.type === "touchstart") {
+        if(event.type !== "touchmove") {
           this.onSettingsClick.emit(true);
         }
       }
@@ -188,7 +188,7 @@ export class GamepadComponent {
       // Handle Pause Button
       if(event.target.id === 'pauseBtn') {
         // Only want to respect the touch start event
-        if(event.type === "touchstart") {
+        if(event.type !== "touchmove") {
           (<any>window).Module.pico8TogglePaused();
         }
       }
