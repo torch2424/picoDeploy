@@ -4,7 +4,7 @@
   },
   "picosplash": {
     "enable": true,
-    "splashMedia": "assets/picoSplash/splash.gif"
+    "splashMedia": "assets/picoSplash/splash.mp4"
   },
   "backgroundMedia": false,
   "defaultSettings": {
