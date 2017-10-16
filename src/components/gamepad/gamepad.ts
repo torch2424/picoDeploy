@@ -139,6 +139,13 @@ export class GamepadComponent {
         const touchX = touch.clientX - this.buttons.dpad.rect.left;
         let touchY = touch.clientY - this.buttons.dpad.rect.top;
 
+        // Fix for shoot button causing the character to move right on multi touch error
+        // + 50 for some buffer
+        if(touchX > (rectCenterX + (this.buttons.dpad.rect.width / 2) + 50)) {
+          // Ignore the event
+          return;
+        }
+
         // Create an additonal influece for horizontal, to make it feel better
         const horizontalInfluence = this.buttons.dpad.rect.width / 8;
 
