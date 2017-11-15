@@ -125,11 +125,11 @@ export class PicoDbProvider {
         const currentDbValue = this.bufferToPico8Text(val.contents);
         const diff = this.currentValue.filter(x => currentDbValue.indexOf(x) < 0);
         if(diff.length > 0) {
-          // Save the new current value
-          this.currentValue = this.bufferToPico8Text(val.contents);
-
           // Publish to our subscribers
-          this.publish();
+          this.publish(currentDbValue, this.currentValue);
+
+          // Save the new current value
+          this.currentValue = currentDbValue;
         }
         // Continue Listening
         this.listen();
@@ -141,9 +141,9 @@ export class PicoDbProvider {
     return this.currentValue;
   }
 
-  publish() {
+  publish(newValue, oldValue) {
     Object.keys(this.subscribers).forEach(subscriberKey => {
-      this.subscribers[subscriberKey](this.currentValue);
+      this.subscribers[subscriberKey](newValue, oldValue);
     });
   }
 
