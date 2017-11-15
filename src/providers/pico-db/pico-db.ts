@@ -122,7 +122,8 @@ export class PicoDbProvider {
       this.idbKeyval.get(this.cartDataKey).then(val => {
 
         // Check for differences between the two arrays
-        const diff = this.currentValue.filter(x => val.contents.indexOf(x) < 0);
+        const currentDbValue = this.bufferToPico8Text(val.contents);
+        const diff = this.currentValue.filter(x => currentDbValue.indexOf(x) < 0);
         if(diff.length > 0) {
           // Save the new current value
           this.currentValue = this.bufferToPico8Text(val.contents);
