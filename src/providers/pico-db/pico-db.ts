@@ -62,7 +62,7 @@ export class PicoDbProvider {
       }
       this.currentValue = this.bufferToPico8Text(val.contents);
 
-      this.listen();
+      this.listenForIdbChanges();
     });
   }
 
@@ -115,7 +115,7 @@ export class PicoDbProvider {
     return pico8TextArray;
   }
 
-  listen() {
+  listenForIdbChanges() {
     setTimeout(() => {
 
       // Check if the value changes
@@ -132,7 +132,7 @@ export class PicoDbProvider {
           this.currentValue = currentDbValue;
         }
         // Continue Listening
-        this.listen();
+        this.listenForIdbChanges();
       });
     }, 3500);
   }

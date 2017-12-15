@@ -15,6 +15,20 @@
       <ion-toggle [(ngModel)]="settingsProvider.settings.sound" (ngModelChange)="soundChange($event)"></ion-toggle>
     </ion-item>
 
+    <!-- Can't be placed in ion-item, will break the color picker -->
+    <!-- Faking the ion-item look -->
+    <div *ngIf="platform.is('cordova')" class="fake-ion-item">
+      <div class="fake-ion-item__label">Gamepad Color</div>
+      <div class="fake-ion-item__content">
+        <input [colorPicker]="settingsProvider.settings.gamepadColor"
+          [style.backgroundColor]="settingsProvider.settings.gamepadColor"
+          [value]="settingsProvider.settings.gamepadColor"
+          [cpPosition]="'left'"
+          (colorPickerChange)="gamepadColorChange($event)"
+          readonly />
+      </div>
+    </div>
+
     <!-- Can't be place din ion-item, will break the color picker -->
     <!-- Faking the ion-item look -->
     <div *ngIf="!hasCartBackgroundMedia" class="fake-ion-item">
@@ -24,7 +38,7 @@
           [style.backgroundColor]="settingsProvider.settings.backgroundColor"
           [value]="settingsProvider.settings.backgroundColor"
           [cpPosition]="'left'"
-          (colorPickerChange)="colorChange($event)"
+          (colorPickerChange)="bgColorChange($event)"
           readonly />
       </div>
     </div>

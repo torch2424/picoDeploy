@@ -26,7 +26,7 @@ export class CartComponent {
   private onPauseSubscription: Subscription;
   private exitTimeout: any;
 
-  constructor(platform: Platform, private settingsProvider: SettingsProvider) {
+  constructor(platform: Platform, public settingsProvider: SettingsProvider) {
     // Subscribe to pause and resume events
     // to pause the cart from running to save battery
     this.platform = platform;
@@ -112,6 +112,60 @@ export class CartComponent {
     cartScript.setAttribute('src', `cart/${picoDeployConfig.cart.cartName}`);
     cartScript.setAttribute('type', 'text/javascript');
     document.body.appendChild(cartScript);
+
+    // Listen for the cart to run
+    this.listenForCartRun();
+  }
+
+
+  listenForCartRun() {
+    if((<any>window).Module &&
+    (<any>window).Module["calledRun"]) {
+      // Override / create events for Anything here
+
+      // Create our paused event
+      const pauseEvent = new Event('picoDeployPause');
+
+      // Replace the pause functions so we can access them
+      (<any>window).Module.pico8TogglePaused = () => {
+        (<any>window).codo_command = 4;
+        (<any>window).Module.pico8IsPaused = !(<any>window).Module.pico8IsPaused;
+        (<any>window).dispatchEvent(pauseEvent);
+      }
+
+      (<any>window).Module.pico8SetPaused = (shouldPause) => {
+        (<any>window).codo_command = 5;
+        (<any>window).codo_command_p = 0;
+        if(shouldPause) {
+          (<any>window).Module.pico8IsPaused = true;
+          (<any>window).codo_command_p = 1;
+        } else {
+          (<any>window).Module.pico8IsPaused = false;
+        }
+        (<any>window).dispatchEvent(pauseEvent);
+      }
+
+
+      // Lastly create/displatch our called run event
+      const cartCalledRunEvent = new Event('picoDeployCartCalledRun');
+      (<any>window).dispatchEvent(cartCalledRunEvent);
+    }
+
+    if((<any>window).Module && (<any>window)._cdpos > 0) {
+
+      // Lastly create/displatch our called run event
+      const cartPlayableEvent = new Event('picoDeployCartPlayable');
+      (<any>window).dispatchEvent(cartPlayableEvent);
+
+      // Return stop listening
+      return;
+    }
+
+
+    // Keep Listening
+    setTimeout(() => {
+      this.listenForCartRun();
+    }, 250);
   }
 
   ngOnDestroy() {

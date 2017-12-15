@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, ViewController, NavParams } from 'ionic-angular';
 
 import { SettingsProvider } from '../../../providers/settings/settings';
+import { Platform } from 'ionic-angular';
 
 const picoDeployConfig = require('../../../../picoDeployConfig.json');
 
@@ -16,7 +17,7 @@ export class SettingsModal {
   isOpen: boolean
   hasCartBackgroundMedia: boolean
 
- constructor(private params: NavParams, private view: ViewController, public settingsProvider: SettingsProvider) {
+ constructor(private params: NavParams, private view: ViewController, public settingsProvider: SettingsProvider, public platform: Platform) {
 
    // Check if we have cart background media
    this.hasCartBackgroundMedia = false;
@@ -31,7 +32,12 @@ export class SettingsModal {
    this.settingsProvider.save();
  }
 
- colorChange(event) {
+ gamepadColorChange(event) {
+   this.settingsProvider.settings.gamepadColor = event;
+   this.settingsProvider.save();
+ }
+
+ bgColorChange(event) {
    this.settingsProvider.settings.backgroundColor = event;
    this.settingsProvider.save();
  }

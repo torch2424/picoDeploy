@@ -21,6 +21,7 @@ export class SettingsProvider {
     this.settings = {
       sound: true,
       backgroundColor: "#272727",
+      gamepadColor: "#FFFFFF",
       stretch: false
     }
 

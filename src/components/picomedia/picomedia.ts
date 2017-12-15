@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, AfterViewInit } from '@angular/core';
 
 /**
  * Generated class for the PicomediaComponent component.
@@ -10,11 +10,13 @@ import { Component, Input } from '@angular/core';
   selector: 'picomedia',
   templateUrl: 'picomedia.html'
 })
-export class PicomediaComponent {
+export class PicomediaComponent implements AfterViewInit {
   @Input() filepath: string;
 
   isImage: boolean;
   isVideo: boolean;
+  videoElementId: any;
+  videoElement: any;
 
   constructor() {
     // Set our variables to false
@@ -22,7 +24,7 @@ export class PicomediaComponent {
     this.isVideo = false;
   }
 
-  ngOnInit() {
+  ngAfterViewInit() {
     // Error and return if we do not have a passed path
     if(!this.filepath) {
       console.error('Picomedia Component: No passed path was found.');
@@ -39,6 +41,27 @@ export class PicomediaComponent {
       console.error(`Picomedia Component: Supplied path is not a supported HTML5 file type: ${this.filepath}`);
       return;
     }
-  }
 
+    // Start our listener for the media to pause if the media is video
+    // Find when the game is paused
+    if (this.isVideo) {
+      this.videoElementId = `picomedia-video${Math.floor(Math.random() * 10000)}`
+      // Timeout to wait for ngIf to apply
+      setTimeout(() => {
+        this.videoElement = document.getElementById(this.videoElementId);
+        // Listen to our pause event from cart.js
+        (<any>window).addEventListener('picoDeployPause', () => {
+          if(!(<any>window).Module.pico8IsPaused &&
+          this.videoElement.paused) {
+            // resume
+            this.videoElement.play();
+          } else if ((<any>window).Module.pico8IsPaused &&
+          !this.videoElement.paused) {
+            // Pause
+            this.videoElement.pause()
+          }
+        });
+      });
+    }
+  }
 }

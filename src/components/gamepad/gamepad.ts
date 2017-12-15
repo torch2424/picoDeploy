@@ -1,4 +1,5 @@
 import { Component, Output, EventEmitter } from '@angular/core';
+import { SettingsProvider } from '../../providers/settings/settings';
 import { Platform } from 'ionic-angular';
 
 /**
@@ -18,7 +19,7 @@ export class GamepadComponent {
   currentTouch: any
   showVirtualGamepad: boolean
 
-  constructor(platform: Platform) {
+  constructor(public settingsProvider: SettingsProvider, platform: Platform) {
     // Set up our buttons
     (<any>window).pico8_buttons = [0,0,0,0,0,0,0,0];
     if(platform.is('cordova')) {
