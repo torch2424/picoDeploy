@@ -19,10 +19,14 @@ export class GamepadComponent {
   currentTouch: any
   showVirtualGamepad: boolean
 
-  constructor(public settingsProvider: SettingsProvider, platform: Platform) {
+  constructor(public settingsProvider: SettingsProvider, public platform: Platform) {
+
     // Set up our buttons
     (<any>window).pico8_buttons = [0,0,0,0,0,0,0,0];
-    if(platform.is('cordova')) {
+    // Show the virtualgamepad if we are on a cordova device, or a mobile device
+    // Inside a web browser (e.g chrome mobile device emeulator)
+    if(this.platform.is('cordova') ||
+    this.platform.is('mobileweb')) {
       this.showVirtualGamepad = true;
     } else {
       this.showVirtualGamepad = false;
@@ -97,6 +101,22 @@ export class GamepadComponent {
     window.requestAnimationFrame(() => this.updatePico8Controller());
   }
 
+  //Function to get an element target from SVGs being embedded in HTML
+  getEventTargetElementId(event) {
+
+    let targetId = event.target.id;
+    // Return the first id in the event path
+    event.path.some((element) => {
+      if(element.id && element.id.length > 0) {
+        targetId = element.id;
+        return true;
+      }
+      return false;
+    });
+
+    return targetId;
+  }
+
   // Function to update button position and size
   updateGamepadRect() {
     // Read from the DOM, and get each of our elements position, doing this here, as it is best to read from the dom in sequence
@@ -112,9 +132,9 @@ export class GamepadComponent {
   // Our handler function for touch events
   // Will stop event from propogating, and pass to the correct handler
   touchEventHandler(event) {
-    if (!event) return
+    if (!event || !event.touches) return
 
-    event.stopPropagation();
+    //event.stopPropagation();
     event.preventDefault();
 
     //this.debugCurrentTouch(event);
@@ -125,13 +145,18 @@ export class GamepadComponent {
       event.type === "mousedown") {
 
       // Handle Dpad events
-      if(event.target.id === 'dpad') {
+      if(this.getEventTargetElementId(event) === 'dpad') {
         // Reset the dpad, only one direction at a time
         this.resetDpad();
 
         // Calculate for the correct key
         // Only using the first touch, since we shouldn't be having two fingers on the dpad
-        const touch = event.touches[0];
+        let touch;
+        if (event.type.includes('touch')) {
+          touch = event.touches[0];
+        } else if (event.type.includes('mouse')) {
+          touch = event;
+        }
 
         // Find if the horizontal or vertical influence is greater
         // Find our centers of our rectangles, and our unbiased X Y values on the rect
@@ -176,17 +201,17 @@ export class GamepadComponent {
       }
 
       // Handle Square button
-      if(event.target.id === 'squareBtn') {
+      if(this.getEventTargetElementId(event) === 'squareBtn') {
         this.buttons.squareBtn.pressed = true;
       }
 
       // Handle Cross Button
-      if(event.target.id === 'crossBtn') {
+      if(this.getEventTargetElementId(event) === 'crossBtn') {
         this.buttons.crossBtn.pressed = true;
       }
 
       // Handle Settings Button
-      if(event.target.id === 'settingsBtn') {
+      if(this.getEventTargetElementId(event) === 'settingsBtn') {
         // Only want to respect the touch start event
         if(event.type !== "touchmove") {
           this.onSettingsClick.emit(true);
@@ -194,7 +219,7 @@ export class GamepadComponent {
       }
 
       // Handle Pause Button
-      if(event.target.id === 'pauseBtn') {
+      if(this.getEventTargetElementId(event) === 'pauseBtn') {
         // Only want to respect the touch start event
         if(event.type !== "touchmove") {
           (<any>window).Module.pico8TogglePaused();
@@ -203,17 +228,17 @@ export class GamepadComponent {
     } else {
 
       // Handle Dpad events
-      if(event.target.id === 'dpad') {
+      if(this.getEventTargetElementId(event) === 'dpad') {
         this.resetDpad();
       }
 
       // Handle Square button
-      if(event.target.id === 'squareBtn') {
+      if(this.getEventTargetElementId(event) === 'squareBtn') {
         this.buttons.squareBtn.pressed = false;
       }
 
       // Handle Cross Button
-      if(event.target.id === 'crossBtn') {
+      if(this.getEventTargetElementId(event) === 'crossBtn') {
         this.buttons.crossBtn.pressed = false;
       }
     }
@@ -253,7 +278,7 @@ export class GamepadComponent {
   debugCurrentTouch(event) {
     if (event.touches[0]) {
       this.currentTouch = JSON.stringify({
-        target: event.target.id,
+        target: this.getEventTargetElementId(event),
         clientX: event.touches[0].clientX,
         clientY: event.touches[0].clientY
       }, null, 2);
