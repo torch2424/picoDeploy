@@ -13,10 +13,10 @@ const picoDeployConfig = require('../../../picoDeployConfig.json');
 @Injectable()
 export class PicoDbProvider {
 
-  idbKeyval: any
-  cartDataKey: string
-  currentValue: any
-  subscribers: any
+  idbKeyval: any;
+  cartDataKey: string;
+  currentValue: any = [];
+  subscribers: any = {};
 
   constructor() {
 
@@ -25,20 +25,29 @@ export class PicoDbProvider {
       return;
     }
 
+    window.addEventListener('picoDeployCartPlayable', () => {
+      // initialize our DB
+      this.initialize();
+    });
+  }
+
+  // Function called by the constructor once the cart playable event is fired on the window
+  initialize() {
     // Set our defaults
     const dbName = '/user_data';
     const objectStoreName = 'FILE_DATA';
     const cartDataName = picoDeployConfig.dbWatcher.cartDataName;
     const cartDataKey = `/user_data/cdata/${cartDataName}.p8d.txt`;
     this.cartDataKey = cartDataKey;
-    this.subscribers = {};
 
 
     // pico 8 idb version is 21
-    // TODO: Need to also listen for when the database is
-    // created so we can start alerting the pub sub as well
     const dbPromise = idb.open(dbName, 21, upgradeDB => {
       //TODO: Handle Upgrade
+      console.log('Pico-db: Upgrading db by creating the object store for pico-8', upgradeDB);
+
+      // Create the object store
+      upgradeDB.createObjectStore(objectStoreName);
     });
 
     // Only need the get functionality of idbKeyval
@@ -46,11 +55,13 @@ export class PicoDbProvider {
     this.idbKeyval = {
       get(key) {
         return dbPromise.then(db => {
-          if(db.objectStoreNames.contains(objectStoreName)) {
+          if(db) {
             return db.transaction(objectStoreName)
               .objectStore(objectStoreName).get(key);
           }
-          return undefined;
+          return new Promise((reject) => {
+            reject();
+          });
         });
       }
     };
@@ -61,9 +72,9 @@ export class PicoDbProvider {
         return;
       }
       this.currentValue = this.bufferToPico8Text(val.contents);
-
-      this.listenForIdbChanges();
     });
+
+    this.listenForIdbChanges();
   }
 
   // idb value will be returned as a UTF8 array buffer
@@ -120,17 +131,20 @@ export class PicoDbProvider {
 
       // Check if the value changes
       this.idbKeyval.get(this.cartDataKey).then(val => {
+        if(val !== undefined) {
+          // Check for differences between the two arrays
+          const currentDbValue = this.bufferToPico8Text(val.contents);
+          const diff = this.currentValue.filter(x => currentDbValue.indexOf(x) < 0);
+          if(diff.length > 0 ||
+          currentDbValue.length > this.currentValue.length) {
+            // Publish to our subscribers
+            this.publish(currentDbValue, this.currentValue);
 
-        // Check for differences between the two arrays
-        const currentDbValue = this.bufferToPico8Text(val.contents);
-        const diff = this.currentValue.filter(x => currentDbValue.indexOf(x) < 0);
-        if(diff.length > 0) {
-          // Publish to our subscribers
-          this.publish(currentDbValue, this.currentValue);
-
-          // Save the new current value
-          this.currentValue = currentDbValue;
+            // Save the new current value
+            this.currentValue = currentDbValue;
+          }
         }
+
         // Continue Listening
         this.listenForIdbChanges();
       });
