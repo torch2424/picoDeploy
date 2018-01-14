@@ -6,6 +6,9 @@ package-lock.json
 # Our dist directory for app builds
 dist/
 
+# Our project-level picoDeployConfig.json, since it is being replaced with copyConfig
+picoDeployConfig.json
+
 *~
 *.sw[mnpcod]
 *.log

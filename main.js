@@ -1,6 +1,8 @@
-const {app, BrowserWindow} = require('electron')
-const path = require('path')
-const url = require('url')
+const {app, BrowserWindow} = require('electron');
+const path = require('path');
+const url = require('url');
+const fs = require('fs');
+const picoDeployConfig = require('./picoDeployConfig.json');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -11,8 +13,8 @@ function createWindow () {
   win = new BrowserWindow({
     width: 800,
     height: 600,
-    title: "picoDeploy",
-  })
+    title: "picoDeploy"
+  });
 
   // and load the index.html of the app.
   win.loadURL(url.format({
@@ -25,6 +27,7 @@ function createWindow () {
   if(process.env.DEV) {
     win.webContents.openDevTools();
   }
+
 
   // Emitted when the window is closed.
   win.on('closed', () => {
