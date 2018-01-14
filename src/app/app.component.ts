@@ -3,7 +3,8 @@ import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
-import { PicoDbProvider } from '../providers/pico-db/pico-db';
+import { PlatformSdkWrapperProvider } from '../providers/platform-sdk-wrapper/platform-sdk-wrapper';
+const picoDeployConfig = require('../../picoDeployConfig.json');
 
 @Component({
   templateUrl: 'app.html'
@@ -15,18 +16,19 @@ export class MyApp {
       statusBar: StatusBar,
       splashScreen: SplashScreen,
       screenOrientation: ScreenOrientation,
-      picoDbProvider: PicoDbProvider) {
+      platformSdkWrapper: PlatformSdkWrapperProvider) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
-      if(platform.is('cordova')) {
+      if (platform.is('cordova')) {
         screenOrientation.lock(screenOrientation.ORIENTATIONS.LANDSCAPE);
       }
 
-      if((<any>window).process) {
-        console.log('Electron Process: ', (<any>window).process);
+      // Finally start our platform sdk wrapper, if we are watching the db
+      if(picoDeployConfig.dbWatcher.enable) {
+        platformSdkWrapper.initialize();
       }
     });
   }

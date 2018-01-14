@@ -1,3 +1,6 @@
+// https://github.com/krajzeg/pico8gamepad
+// slightly modified by @torch2424
+
 // ====== [CONFIGURATION] - tailor to your specific needs
 
 // How many PICO-8 players to support?
@@ -10,11 +13,11 @@ var supportedPlayers = 2;
 // be mapped to PICO-8 O and X buttons.
 var mapFaceButtons = true;
 var mapShoulderButtons = true;
-var mapTriggerButtons = false;
+var mapTriggerButtons = true;
 var mapStickButtons = false;
 
 // How far you have to pull an analog stick before it register as a PICO-8 d-pad direction
-var stickDeadzone = 0.4;
+var stickDeadzone = 0.5;
 
 // ====== [IMPLEMENTATION]
 
@@ -47,12 +50,12 @@ function updateGamepads() {
   	bitmask |= (axis(gp,1) > +stickDeadzone || axis(gp,3) > +stickDeadzone || btn(gp,13)) ? 8 : 0; // down
     // O and X buttons
     var pressedO =
-    	(mapFaceButtons && (btn(gp,0) || btn(gp,2))) ||
+    	(mapFaceButtons && (btn(gp,2) || btn(gp,3))) ||
     	(mapShoulderButtons && btn(gp,5)) ||
     	(mapTriggerButtons && btn(gp,7)) ||
     	(mapStickButtons && btn(gp,11));
     var pressedX =
-    	(mapFaceButtons && (btn(gp,1) || btn(gp,3))) ||
+    	(mapFaceButtons && (btn(gp,0) || btn(gp,1))) ||
     	(mapShoulderButtons && btn(gp,4)) ||
     	(mapTriggerButtons && btn(gp,6)) ||
     	(mapStickButtons && btn(gp,10));

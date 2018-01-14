@@ -9,7 +9,7 @@
   "scripts": {
     "clean": "ionic-app-scripts clean",
     "lint": "ionic-app-scripts lint",
-    "cart": "rm -rf www/cart && cp -r cart www/",
+    "cart": "rm -rf www/cart && mkdir www/cart && cp -r cart/* www/cart",
     "config": "node config/copyConfig.js",
     "build": "npm run ionic:build",
     "serve": "npm run ionic:serve",
@@ -28,7 +28,7 @@
     "appId": "com.example.picoDeploy",
     "productName": "picoDeploy",
     "directories": {
-        "buildResources": "resources"
+      "buildResources": "resources"
     },
     "files": [
       "www/**/*",
@@ -82,7 +82,6 @@
     "cordova-plugin-console": "^1.0.5",
     "cordova-plugin-crosswalk-webview": "^2.3.0",
     "cordova-plugin-device": "^1.1.4",
-    "cordova-plugin-play-games-services": "^1.1.0",
     "cordova-plugin-screen-orientation": "^2.0.1",
     "cordova-plugin-splashscreen": "^4.0.3",
     "cordova-plugin-statusbar": "^2.2.2",
@@ -116,9 +115,6 @@
       "ionic-plugin-keyboard": {},
       "cordova-plugin-screen-orientation": {},
       "cordova-sqlite-storage": {},
-      "cordova-plugin-play-games-services": {
-        "APP_ID": "149031609432"
-      },
       "cordova-plugin-crosswalk-webview": {
         "XWALK_VERSION": "23+",
         "XWALK_LITEVERSION": "xwalk_core_library_canary:17+",
@@ -126,9 +122,6 @@
         "XWALK_MODE": "embedded",
         "XWALK_MULTIPLEAPK": "true"
       }
-    },
-    "platforms": [
-      "android"
-    ]
+    }
   }
 }

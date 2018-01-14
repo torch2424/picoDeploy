@@ -4,11 +4,12 @@
   },
   "picosplash": {
     "enable": true,
-    "splashMedia": "assets/picoSplash/splash.mp4"
+    "splashMedia": "assets/picomedia/splash.mp4"
   },
   "backgroundMedia": false,
   "inactiveToExitDelayInMilli": 300000,
   "defaultSettings": {
+    "fullscreen": true,
     "sound": true,
     "backgroundColor": "#272727",
     "gamepadColor": "#FFFFFF",
@@ -16,6 +17,6 @@
   },
   "dbWatcher": {
     "enable": false,
-    "cartDataName": "YOUR_STRING_PASSED_TO_cartdata()"
+    "cartDataName": "nocomplygames_letsgetdismoney_v1"
   }
 }

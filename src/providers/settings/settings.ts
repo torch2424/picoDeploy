@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
+import { Platform } from 'ionic-angular';
 
 const picoDeployConfig = require('../../../picoDeployConfig.json');
 
@@ -16,9 +17,10 @@ export class SettingsProvider {
   // Can be edited directly by components
   settings: any
 
-  constructor(private storage: Storage) {
+  constructor(private storage: Storage, private platform: Platform) {
     // Set our default settings
     this.settings = {
+      fullscreen: true,
       sound: true,
       backgroundColor: "#272727",
       gamepadColor: "#FFFFFF",
@@ -28,13 +30,26 @@ export class SettingsProvider {
     // Apply the default passed in by picoDeployConfig
     this.settings = Object.assign({}, this.settings, picoDeployConfig.defaultSettings);
 
-    // Get our true settings
+    // Get our saved settings
+    const savedSettingsPromises = [];
     Object.keys(this.settings).forEach(settingKey => {
-      storage.get(settingKey).then(value => {
-        if(value !== undefined && value !== null) {
-          this.settings[settingKey] = value;
-        }
-      });
+      savedSettingsPromises.push(new Promise((resolve, reject) => {
+        storage.get(settingKey).then(value => {
+          if(value !== undefined && value !== null) {
+            this.settings[settingKey] = value;
+          }
+          resolve();
+        }).catch((error) => {
+          reject(error);
+        });
+      }));
+    });
+
+    // Check if we can fullscreen the app
+    Promise.all(savedSettingsPromises).then(() => {
+      if (this.settings.fullscreen && !this.platform.is('cordova') && !!(<any>window).require) {
+        (<any>window).require('electron').remote.getCurrentWindow().setFullScreen(true);
+      }
     });
   }
 

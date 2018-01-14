@@ -16,3 +16,18 @@
 // automatically applied to the <body> element in the app.
 @import './node_modules/sass-media-queries/index.scss';
 @import './node_modules/sass-theme-defaults/index.scss';
+
+/* Hide Scrollbars for electron */
+
+html, body {
+    overflow: hidden;
+}
+
+::-webkit-scrollbar {
+    display: none;
+    width: 0px;  /* remove scrollbar space */
+    background: transparent;  /* optional: just make scrollbar invisible */
+}
+/* optional: show position indicator in red */
+::-webkit-scrollbar-thumb {
+}

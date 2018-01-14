@@ -9,6 +9,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { MyApp } from './app.component';
 import { SettingsProvider } from '../providers/settings/settings';
 import { PicoDbProvider } from '../providers/pico-db/pico-db';
+import { PlatformSdkWrapperProvider } from '../providers/platform-sdk-wrapper/platform-sdk-wrapper';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { PicoDbProvider } from '../providers/pico-db/pico-db';
     ScreenOrientation,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     SettingsProvider,
-    PicoDbProvider
+    PicoDbProvider,
+    PlatformSdkWrapperProvider
   ]
 })
 export class AppModule {}

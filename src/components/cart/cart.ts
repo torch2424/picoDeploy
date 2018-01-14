@@ -87,7 +87,7 @@ export class CartComponent {
         if ([32, 37, 38, 39, 40].indexOf(event.keyCode) > -1) {
           if (event.preventDefault) event.preventDefault();
         }
-        // Also check for Enter/Paause and O for onOption
+        // Also check for Enter/Pause and O for onOption
         // Escape will cause a lot of problems with Ionic :(
         // Doing everything to stop this propogation, even on other handlers
         // https://javascript.info/bubbling-and-capturing
@@ -113,10 +113,9 @@ export class CartComponent {
     cartScript.setAttribute('type', 'text/javascript');
     document.body.appendChild(cartScript);
 
-    // Listen for the cart to run
+    // Listen for the cart to run to override some default functions
     this.listenForCartRun();
   }
-
 
   listenForCartRun() {
     if((<any>window).Module &&
@@ -126,14 +125,34 @@ export class CartComponent {
       // Create our paused event
       const pauseEvent = new Event('picoDeployPause');
 
-      // Replace the pause functions so we can access them
+      // Replace the pause functions so we can access them, and throttle them
+      (<any>window).Module._pico8PicoDeployPauseThrottleStatus = false;
+      (<any>window).Module.pico8PicoDeployPauseThrottle = () => {
+        (<any>window).Module._pico8PicoDeployPauseThrottleStatus = true;
+        setTimeout(() => {
+          (<any>window).Module._pico8PicoDeployPauseThrottleStatus = false;
+        }, 750);
+      };
+
       (<any>window).Module.pico8TogglePaused = () => {
+
+        if((<any>window).Module._pico8PicoDeployPauseThrottleStatus) {
+          return;
+        }
+
         (<any>window).codo_command = 4;
         (<any>window).Module.pico8IsPaused = !(<any>window).Module.pico8IsPaused;
+
+        (<any>window).Module.pico8PicoDeployPauseThrottle();
         (<any>window).dispatchEvent(pauseEvent);
       }
 
       (<any>window).Module.pico8SetPaused = (shouldPause) => {
+
+        if((<any>window).Module._pico8PicoDeployPauseThrottleStatus) {
+          return;
+        }
+
         (<any>window).codo_command = 5;
         (<any>window).codo_command_p = 0;
         if(shouldPause) {
@@ -142,6 +161,8 @@ export class CartComponent {
         } else {
           (<any>window).Module.pico8IsPaused = false;
         }
+
+        (<any>window).Module.pico8PicoDeployPauseThrottle();
         (<any>window).dispatchEvent(pauseEvent);
       }
 

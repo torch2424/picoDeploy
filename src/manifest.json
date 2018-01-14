@@ -1,6 +1,6 @@
 {
-  "name": "Ionic",
-  "short_name": "Ionic",
+  "name": "picoDeploy",
+  "short_name": "picodeploy",
   "start_url": "index.html",
   "display": "standalone",
   "icons": [{
