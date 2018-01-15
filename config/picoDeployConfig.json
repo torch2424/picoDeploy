@@ -1,6 +1,6 @@
 {
   "cart": {
-    "cartName": "getdismoney-communitty.js"
+    "cartName": "getdismoney-community.js"
   },
   "picosplash": {
     "enable": true,
@@ -17,6 +17,6 @@
   },
   "dbWatcher": {
     "enable": true,
-    "cartDataName": "nocomplygames_letsgetdismoney_communitty_edition_v1"
+    "cartDataName": "nocomplygames_letsgetdismoney_community_edition_v1"
   }
 }

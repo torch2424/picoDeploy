@@ -145,7 +145,7 @@ Example / Inlined `picoDeployConfig.json` file with invalid json comment lines t
 ```
 {
   "cart": {
-    "cartName": "getdismoney-communitty.js" // Name or path of the cart inside the cart/ directory
+    "cartName": "getdismoney-community.js" // Name or path of the cart inside the cart/ directory
   },
   "picosplash": { // Settings reffering to the introduction splash screen that hides pico-8 booting
     "enable": true, // Boolean to enable or disable the pico splash
