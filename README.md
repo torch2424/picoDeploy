@@ -9,10 +9,11 @@
 # Table Of Contents
 
 * [Features](#features)
-* [Getting Started (Usage)](#getting-started-usage)
+* [Getting Started](#getting-started)
 * [Key Gotchas and Caveats](#compatibility)
 * [Keyboard Controls](#getting-started)
 * [Project Layout](#compatibility)
+* [Usage](#Usage)
 * [Example Projects](#compatibility)
 * [Building and Deploying for Web](#getting-started)
 * [Building and Deploying for Desktop](#getting-started)
@@ -38,7 +39,7 @@
 
 P.S I totally started this project before [version 0.1.11](https://www.lexaloffle.com/bbs/?tid=30219) which included binary exports for Windows, Mac, and Linux. However, this project still offers a great amount of functionality for deploying and building games, that binary exports do not offer currently.
 
-# Getting Started (Usage)
+# Getting Started
 
 1. Install [Nodejs](https://nodejs.org/en/download/package-manager/). I suggest using [NVM](https://github.com/creationix/nvm).
 
@@ -50,7 +51,41 @@ P.S I totally started this project before [version 0.1.11](https://www.lexaloffl
 
 4. If a game starts running in your browser, then you are ready to go. Enjoy! 😊
 
-**To add your own cart(s):**
+# Key Gotchas and Caveats
+
+* Minimum android version is 7.1.1 (sdk version 25). This is due to the [Web Audio API](https://caniuse.com/#feat=audio-api) and how around Android version 7, [android replaced their webview with Mobile Chrome](https://developer.android.com/about/versions/nougat/android-7.0.html#webview). Games can technically be played on Android versions below this, but there will be a weird [Audio Jitter / Crackle](https://www.lexaloffle.com/bbs/?tid=30573). Please feel free to click the previous link to join the discussion, or open an issue if you feel you may have a solution.
+
+* Adding support for Steamworks using [greenworks](https://github.com/greenheartgames/greenworks) will have many missing steam features, and can be quite finnicky. For instance, the Steam UI cannot be opened, even with mentioned hacks within the projects issues. However, most functionality such as logging into steam, and launching achievements should work.
+
+# Keyboard Controls
+
+![Pico 8 Controller Keyboard Layout](https://neko250.github.io/pico8-api/img/input.png)
+[Image from pico8-api](https://neko250.github.io/pico8-api/)
+
+Additional Key commands are:
+
+* `o` for settings (options)
+* `p` for pause
+
+# Project Layout
+
+* `cart/` - Where `cart.js` files are stored.
+* `config/` - Where `picoDeployConfig.whatever.json` files are placed, and the `copyConfig.js` file lives to copy `picoDeployConfig.json` to the base of the project to be used by the application.
+* `resources/` - Where app icons for Electron Builder and Ionic are stored
+* `src/` - Where the source code for the Ionic application lives.
+* `src/app` - The main app component
+* `src/assets` - Where asstets for the application lives. Please take note of `src/assets/picomedia` where the splashscreen and things are stored
+* `src/components` - Where The application components are stored. Such as the cart, and gamepad components
+* `src/pages` - Where the Home and Settings page components are stored
+* `src/providers` - Where the services are stored. Such as the Save file listener provider, and the Settings provider.
+* `config.xml` - Ionic / Cordova Config for building the application
+* `ionic-android-deploy.sh` - Script for easing the proccess of building signed android apks to upload to the Google Play Store.
+* `main.js` - Electron Main process Javascript file. See [Electron Quick Start](https://github.com/electron/electron/blob/master/docs/tutorial/quick-start.md)
+* `package.json` - Project file to define scripts and dependencies
+
+# Usage
+
+### To add your own cart(s):
 
 1. open pico-8
 2. load your cart
@@ -64,7 +99,7 @@ Or just watch these steps in the gif below:
 5. edit the `picoDeployConfig.json` file to include your cart instead of the included one.
 6. Run `npm run ionic:serve`, and ensure that your cart is now the one being loaded!
 
-**Npm Scripts / CLI**
+### Npm Scripts / CLI
 
 All of the scripts should be prepended with `npm run [script name]`, for instance `npm run ionic:serve`
 
@@ -90,7 +125,7 @@ The android scripts will require you to set up your android environment, outline
 * `electron:deploy` - Similar to `electron:build`, but builds for all desktop platforms (Windows, Mac, and Linux), using the Electron builder configuration outlined in the `package.json`
 
 
-**picoDeployConfig**
+### picoDeployConfig.json
 
 Inlined the json file with improper comment files to describe each key
 
@@ -119,11 +154,13 @@ Inlined the json file with improper comment files to describe each key
 }
 ```
 
-# Key Gotchas and Caveats
+# Contributing
 
-* Minimum android version is 7.1.1 (sdk version 25). This is due to the [Web Audio API](https://caniuse.com/#feat=audio-api) and how around Android version 7, [android replaced their webview with Mobile Chrome](https://developer.android.com/about/versions/nougat/android-7.0.html#webview). Games can technically be played on Android versions below this, but there will be a weird [Audio Jitter / Crackle](https://www.lexaloffle.com/bbs/?tid=30573). Please feel free to click the previous link to join the discussion, or open an issue if you feel you may have a solution.
+Feel free to fork the project, open up a PR, and give any contributions! I'd suggest opening an issue first however, just so everyone is aware and can discuss the proposed changes.
 
-* Adding support for Steamworks using [greenworks](https://github.com/greenheartgames/greenworks) will have many missing steam features, and can be quite finnicky. For instance, the Steam UI cannot be opened, even with mentioned hacks within the projects issues. However, most functionality such as logging into steam, and launching achievements should work.
+# LICENSE
+
+LICENSE under [Apache 2.0](https://choosealicense.com/licenses/apache-2.0/)
 
 # Notes
 
@@ -178,30 +215,3 @@ need android 6.3
 ```
 cordova platform add android@6.3.0
 ```
-
-
-This is a starter template for [Ionic](http://ionicframework.com/docs/) projects.
-
-## How to use this template
-
-*This template does not work on its own*. The shared files for each starter are found in the [ionic2-app-base repo](https://github.com/ionic-team/ionic2-app-base).
-
-To use this template, either create a new ionic project using the ionic node.js utility, or copy the files from this repository into the [Starter App Base](https://github.com/ionic-team/ionic2-app-base).
-
-### With the Ionic CLI:
-
-Take the name after `ionic2-starter-`, and that is the name of the template to be used when using the `ionic start` command below:
-
-```bash
-$ sudo npm install -g ionic cordova
-$ ionic start myBlank blank
-```
-
-Then, to run it, cd into `myBlank` and run:
-
-```bash
-$ ionic cordova platform add ios
-$ ionic cordova run ios
-```
-
-Substitute ios for android if not on a Mac.
