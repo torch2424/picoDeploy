@@ -11,17 +11,20 @@
 * [Introduction](#introduction)
 * [Features](#features)
 * [Getting Started](#getting-started)
-* [Key Gotchas and Caveats](#compatibility)
-* [Keyboard Controls](#getting-started)
-* [Project Layout](#compatibility)
-* [Usage](#Usage)
-* [Example Projects](#compatibility)
-* [Building and Deploying for Web](#getting-started)
-* [Building and Deploying for Desktop](#getting-started)
-* [Building and Deploying for Android](#getting-started)
-* [Building and Deploying for iOS](#getting-started)
-* [Adding Support for Game Distribution Platforms](#compatibility)
-* [Parent Projects and Dependencies](#additional-info)
+* [Key Gotchas and Caveats](#key-gotchas-and-caveats)
+* [Keyboard Controls](#keyboard-controls)
+* [Project Layout](#project-layout)
+* [Usage](#usage)
+  * [To add your own carts](#to-add-your-own-carts)
+  * [Npm Scripts / CLI](#npm-scripts--cli)
+  * [picoDeployConfig.json](#picodeployconfigjson)
+* [Example Projects](#example-projects)
+* [Building and Deploying for Web](#building-and-deploying-for-web)
+* [Building and Deploying for Desktop](#building-and-deploying-for-desktop)
+* [Building and Deploying for Android](#building-and-deploying-for-android)
+* [Building and Deploying for iOS](#building-and-deploying-for-ios)
+* [Adding Support for Game Distribution Platforms](#adding-support-for-game-distribution-platforms)
+* [Parent Projects and Dependencies](#parent-projects-and-dependencies)
 * [Contributing](#contributing)
 * [LICENSE](#license)
 
@@ -92,7 +95,7 @@ Additional Key commands are:
 
 # Usage
 
-### To add your own cart(s):
+### To add your own carts
 
 1. open pico-8
 2. load your cart
