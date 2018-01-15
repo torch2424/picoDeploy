@@ -1,11 +1,48 @@
 # Pico Deploy
 *Deploy Pico-8 Games Anywhere and Everywhere!*
 
-**Example .gifs show the jelpi demo cart. Included cart is different.**
-
 ![Electron Desktop Example of picoDeploy](./docs/readmeAssets/picoDeployElectronBuild.gif)
 ![Ionic Mobile Android Example of picoDeploy](./docs/readmeAssets/picoDeployAndroidExample.gif)
 
+**Example .gifs show the jelpi demo cart. Included cart is different.**
+
+# Table Of Contents
+
+* [Features](#features)
+* [Getting Started](#getting-started)
+* [Key Gotchas and Caveats](#compatibility)
+* [Keyboard Controls](#getting-started)
+* [Project Layout](#compatibility)
+* [Example Projects](#compatibility)
+* [Building and Deploying for Web](#getting-started)
+* [Building and Deploying for Desktop](#getting-started)
+* [Building and Deploying for Android](#getting-started)
+* [Building and Deploying for iOS](#getting-started)
+* [Adding support for other platforms](#compatibility)
+* [Parent Projects and Dependencies](#additional-info)
+* [Contributing](#contributing)
+* [LICENSE](#license)
+
+# Features
+
+* Deploy to Windows, Mac, and Linux using [Electron](https://electronjs.org/) and [Electron Builder](https://github.com/electron-userland/electron-builder)
+* Deploy to Android, iOS, and Web with all listed features using [Ionic](https://ionicframework.com/)
+* Save file (Indexedb) listener, with Pub / Sub functionality to perform actions when the save file is changed
+* Mobile on screen gamepad using [Google Material Icons](https://material.io/icons/)
+* Usb Gamepad / Xbox 360 controller / PS3 controller support using a modified [pico8gamepad](https://github.com/krajzeg/pico8gamepad)
+* Splashscreen / Video to hide the Pico 8 boot screen (Not to be mistaken with Ionic mobile app splash screen)
+* Background image or video to be displayed behind your game
+* Settings screen, with support for turning sound on / off, fullscreen for desktop, customizable gamepad color, customizable background color (if not background media), Stretch the game to full resolution, and dropdown credits.
+* Build System to support multiple `picoDeployConfig` files, and copied for the correct build target set in ENV variables.
+* Compatible with libraries like [greenworks](https://github.com/greenheartgames/greenworks) and [Cordova Plugin Play Games Services](https://github.com/artberri/cordova-plugin-play-games-services). That can be plugged into a commented PlatformSdkWrapper service.
+
+P.S I totally started this project before [version 0.1.11](https://www.lexaloffle.com/bbs/?tid=30219) which included binary exports for Windows, Mac, and Linux. However, this project still offers a great amount of functionality for deploying and building games, that binary exports do not offer currently.
+
+# Key Gotchas and Caveats
+
+* Minimum android version is 7.1.1 (sdk version 25). This is due to the [Web Audio API](https://caniuse.com/#feat=audio-api) and how around Android version 7, [android replaced their webview with Mobile Chrome](https://developer.android.com/about/versions/nougat/android-7.0.html#webview). Games can technically be played on Android versions below this, but there will be a weird [Audio Jitter / Crackle](https://www.lexaloffle.com/bbs/?tid=30573). Please feel free to click the previous link to join the discussion, or open an issue if you feel you may have a solution.
+
+* Adding support for Steamworks using [greenworks](https://github.com/greenheartgames/greenworks) will have many missing steam features, and can be quite finnicky. For instance, the Steam UI cannot be opened, even with mentioned hacks within the projects issues. However, most functionality such as logging into steam, and launching achievements should work.
 
 # Notes
 
