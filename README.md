@@ -309,4 +309,4 @@ Feel free to fork the project, open up a PR, and give any contributions! I'd sug
 
 # LICENSE
 
-LICENSE under [Apache 2.0](https://choosealicense.com/licenses/apache-2.0/) 🐦.
+LICENSE under [Apache 2.0](https://oss.ninja/apache-2.0) 🐦.
