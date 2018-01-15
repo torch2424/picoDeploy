@@ -1,12 +1,12 @@
 # Pico Deploy
-*Deploy Pico-8 Games Anywhere and Everywhere!*
+👾 *Deploy Pico-8 Games Anywhere and Everywhere!* 👾
 
 ![Electron Desktop Example of picoDeploy](./docs/readmeAssets/picoDeployElectronBuild.gif)
 ![Ionic Mobile Android Example of picoDeploy](./docs/readmeAssets/picoDeployAndroidExample.gif)
 
 **Example .gifs show the jelpi demo cart. Included cart is different.**
 
-# Table Of Contents
+# Table Of Contents 📚
 
 * [Introduction](#introduction)
 * [Features](#features)
@@ -24,13 +24,15 @@
 * [Building and Deploying for Android](#building-and-deploying-for-android)
 * [Building and Deploying for iOS](#building-and-deploying-for-ios)
 * [Adding Support for Game Distribution Platforms](#adding-support-for-game-distribution-platforms)
+  * [Google Play](#google-play-games)
+  * [Steam (Greenworks)](#steam-greenworks)
 * [Parent Projects and Dependencies](#parent-projects-and-dependencies)
 * [Contributing](#contributing)
 * [LICENSE](#license)
 
 # Introduction
 
-This project started because I found pico-8 and started building a small hackathon-style game, called [Get Dis Money](https://getdismoney.com), for a local meetup called Code && Coffee, Long Beach. I was used to building games in Unity, but wanted to try something less serious and more fun. After showing the game to some friends, and writing more and more code for the game. I thought, what if I actually tried to write a deployable version of the game? Then I came across [this article](http://missingsentinelsoftware.com/blog/deploying-pico-8-cartridges-electron) by josefnpat, and figured why not. I have been developing Javascript (Node.js) for about 4 years, and have built plenty of Electron apps in the past. However, I also wanted to build for mobile, (Android and iOS), and at the time pico-8 only deployed to web. I thought I'd take it even further, and commit the ultimate web developer sin. I have been using Ionic since when it was still in beta (before v1), and thought, why not just put Ionic inside of electron? I mean this whole project was all for fun, why not make the write-it-once-and-literally-deploy-anywhere wrapper for pico-8? And that is how we got **picoDeploy**.
+This project started because I found pico-8 and started building a small hackathon-style game, called [Get Dis Money](https://getdismoney.com), for a local meetup called Code && Coffee, Long Beach. I was used to building games in Unity, but wanted to try something less serious and more fun. After showing the game to some friends, and writing more and more code for the game. I thought, what if I actually tried to write a deployable version of the game? Then I came across [this article](http://missingsentinelsoftware.com/blog/deploying-pico-8-cartridges-electron) by josefnpat, and figured why not. I have been developing Javascript (Node.js) for about 4 years, and have built plenty of Electron apps in the past. However, I also wanted to build for mobile, (Android and iOS), and at the time pico-8 only deployed to web. I thought I'd take it even further, and commit the ultimate web developer sin 😈. I have been using Ionic since when it was still in beta (before v1), and thought, why not just put Ionic inside of electron? I mean this whole project was all for fun, why not make the write-it-once-and-literally-deploy-anywhere wrapper for pico-8? And that is how we got **picoDeploy**.
 
 # Features
 
@@ -50,7 +52,7 @@ P.S I totally started this project before [version 0.1.11](https://www.lexaloffl
 
 # Getting Started
 
-1. Install [Nodejs](https://nodejs.org/en/download/package-manager/). I suggest using [NVM](https://github.com/creationix/nvm).
+1. Install [Nodejs](https://nodejs.org/en/download/package-manager/). I suggest using [nvm](https://github.com/creationix/nvm).
 
 2. Download this project as a zip, or fork it. This is a base project that yours project will be based upon.
 
@@ -72,10 +74,11 @@ P.S I totally started this project before [version 0.1.11](https://www.lexaloffl
 
 ([Image from pico8-api](https://neko250.github.io/pico8-api/))
 
-Additional Key commands are:
+Additional keyboard (⌨️) commands are:
 
 * `o` for settings (options)
 * `p` for pause
+* `CMD + q` to quit
 
 # Project Layout
 
@@ -98,7 +101,7 @@ Additional Key commands are:
 ### To add your own carts
 
 1. open pico-8
-2. load your cart
+2. load your cart 🛒
 3. export your cart with `CART_NAME.html`
 
 Or just watch these steps in the gif below:
@@ -115,7 +118,7 @@ All of the scripts should be prepended with `npm run [script name]`, for instanc
 
 The main scripts you will be using are the `ionic:x`, `electron:x`, and `android:x` scripts.
 
-The android scripts will require you to set up your android environment, outlined in [Building and Deploying for Android](#getting-started)
+The android scripts will require you to set up your android environment, outlined in [Building and Deploying for Android](#building-and-deploying-for-android).
 
 * `clean` - The default ionic project clean script
 * `lint` - The default ionic project lint script
@@ -137,7 +140,7 @@ The android scripts will require you to set up your android environment, outline
 
 ### picoDeployConfig.json
 
-Inlined the json file with improper comment files to describe each key
+Example / Inlined `picoDeployConfig.json` file with invalid json comment lines to describe each key:
 
 ```
 {
@@ -172,7 +175,7 @@ A list of example project can be found at: [The Example Projects .md](./docs/EXA
 
 For development, `npm run ionic:serve` will provide as a great place to test your carts, or any changes you make to the project. It offers livereloading for the project. However, for cart or config changes, this command will have to be re-run.
 
-Simply running `npm run ionic:build` should give you a good desktop build. The built website should be located in the `www/` folder. Which can then be opened directly from your web browser, or uploaded to a site like [itch.io](https://itch.io/). I haven't personally tested this, but it should all work *in theory*.
+Simply running `npm run ionic:build` should give you a good desktop build. The built website should be located in the `www/` folder. Which can then be opened directly from your web browser, or uploaded to a site like [itch.io](https://itch.io/). I haven't personally tested this, but it should all work *in theory* 🤔. Please run at your own discretion.
 
 # Building and Deploying for Desktop
 
@@ -184,7 +187,7 @@ To build production builds for all platforms to be distributed and downloading o
 
 For Icons and Backgrounds of builds, please refer to the [Electron Builder Icons Guide](https://www.electron.build/icons). I know it sates that for the Icons on Linux, it can optionally share the same Icon as macOS. However, It gave me strange builder errors, and I highly suggest just adding your linux icon as `resources/icons/512x512.png`. Like it states in the guide.
 
-For any additional help, I'd highly suggest looking through the [Electron Builder Documentation](https://www.electron.build/), for anything you may be trying to acheive.
+For any additional help, I'd highly suggest looking through the [Electron Builder Documentation](https://www.electron.build/), for anything you may be trying to achieve.
 
 # Building and Deploying for Android
 
@@ -296,14 +299,14 @@ This project is built on top of the following projects:
 * [Electron Builder for Deployable Desktop Builds](https://github.com/electron-userland/electron-builder)
 * [pico8gamepad for Desktop Controller Support](https://github.com/krajzeg/pico8gamepad)
 
-This project could not exist without these projects, and I would like to give a huge shoutout to them for their amazing work. A lot of problems can be resolved by reffering to these projects issues and stackoverflow answers, and troubleshooting there.
+This project could not exist without these projects, and I would like to give a huge shoutout to them for their amazing work 💕. A lot of problems can be resolved by referring to these projects issues and stackoverflow answers, and troubleshooting there.
 
 For problems with Crosswalk please refer to [this guide](https://www.techiediaries.com/mobiledev/boosting-ionic2-apps-performance-with-crosswalk/) that I followed and the [Crosswalk repo](https://github.com/crosswalk-project/cordova-plugin-crosswalk-webview).
 
 # Contributing
 
-Feel free to fork the project, open up a PR, and give any contributions! I'd suggest opening an issue first however, just so everyone is aware and can discuss the proposed changes.
+Feel free to fork the project, open up a PR, and give any contributions! I'd suggest opening an issue first however, just so everyone is aware and can discuss the proposed changes 🤘.
 
 # LICENSE
 
-LICENSE under [Apache 2.0](https://choosealicense.com/licenses/apache-2.0/)
+LICENSE under [Apache 2.0](https://choosealicense.com/licenses/apache-2.0/) 🐦.
