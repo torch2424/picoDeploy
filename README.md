@@ -1,8 +1,10 @@
 # Pico Deploy
 *Deploy Pico-8 Games Anywhere and Everywhere!*
 
+**Example .gifs show the jelpi demo cart. Included cart is different.**
 
-
+![Electron Desktop Example of picoDeploy](./docs/readmeAssets/picoDeployElectronBuild.gif)
+![Ionic Mobile Android Example of picoDeploy](./docs/readmeAssets/picoDeployAndroidExample.gif)
 
 
 # Notes
@@ -49,6 +51,15 @@ Maybe? Used this to add neccessary android manifest stuff: https://cordova.apach
 
 may need to this to build for all: https://github.com/electron-userland/electron-builder/issues/2204
 Also, need to make sure we have `resources/icons/` folder, with an app icon named `512x512.png` [for linux icon](https://www.electron.build/icons)
+
+May need to install gradle https://github.com/ionic-team/ionic/issues/11591
+
+Cross walk docs: https://github.com/crosswalk-project/cordova-plugin-crosswalk-webview
+
+need android 6.3  
+```
+cordova platform add android@6.3.0
+```
 
 
 This is a starter template for [Ionic](http://ionicframework.com/docs/) projects.

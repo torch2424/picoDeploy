@@ -1,6 +1,6 @@
 {
   "cart": {
-    "cartName": "jelpi.js"
+    "cartName": "getdismoney-communitty.js"
   },
   "picosplash": {
     "enable": true,
@@ -16,7 +16,7 @@
     "stretch": false
   },
   "dbWatcher": {
-    "enable": false,
-    "cartDataName": "nocomplygames_letsgetdismoney_v1"
+    "enable": true,
+    "cartDataName": "nocomplygames_letsgetdismoney_communitty_edition_v1"
   }
 }
