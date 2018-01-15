@@ -1,4 +1,4 @@
-# Pico Deploy
+# picoDeploy
 👾 *Deploy Pico-8 Games Anywhere and Everywhere!* 👾
 
 ![Electron Desktop Example of picoDeploy](./docs/readmeAssets/picoDeployElectronBuild.gif)
