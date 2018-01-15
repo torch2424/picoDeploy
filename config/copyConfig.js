@@ -16,8 +16,8 @@ let consoleMsg = 'Using the following config: ';
 // }
 
 // Include the Jelpi Config
-const getDisMoneyCommunittyConfig = 'picoDeployConfig.getdismoney-communitty.json';
-copyConfig(getDisMoneyCommunittyConfig);
-consoleMsg += getDisMoneyCommunittyConfig;
+const picoDeployConfig = 'picoDeployConfig.json';
+copyConfig(picoDeployConfig);
+consoleMsg += picoDeployConfig;
 
 console.log(consoleMsg);

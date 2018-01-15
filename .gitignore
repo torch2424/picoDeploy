@@ -7,7 +7,7 @@ package-lock.json
 dist/
 
 # Our project-level picoDeployConfig.json, since it is being replaced with copyConfig
-picoDeployConfig.json
+./picoDeployConfig.json
 
 *~
 *.sw[mnpcod]
