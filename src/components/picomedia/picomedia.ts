@@ -53,7 +53,7 @@ export class PicomediaComponent implements AfterViewInit {
         // Play the video
         // TODO: Need to think of a solution from Chrome autoplay policy,
         // as video wont play without interaction
-        this.videoElement.play();
+        // this.videoElement.play();
 
         // Listen to our pause event from cart.js
         (<any>window).addEventListener('picoDeployPause', () => {
