@@ -48,7 +48,13 @@ export class PicomediaComponent implements AfterViewInit {
       this.videoElementId = `picomedia-video${Math.floor(Math.random() * 10000)}`
       // Timeout to wait for ngIf to apply
       setTimeout(() => {
+        // Get our video element
         this.videoElement = document.getElementById(this.videoElementId);
+        // Play the video
+        // TODO: Need to think of a solution from Chrome autoplay policy,
+        // as video wont play without interaction
+        // this.videoElement.play();
+
         // Listen to our pause event from cart.js
         (<any>window).addEventListener('picoDeployPause', () => {
           if(!(<any>window).Module.pico8IsPaused &&

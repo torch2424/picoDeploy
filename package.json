@@ -9,7 +9,7 @@
   "scripts": {
     "clean": "ionic-app-scripts clean",
     "lint": "ionic-app-scripts lint",
-    "cart": "rm -rf www/cart && mkdir www/cart && cp -r cart/* www/cart",
+    "cart": "rm -rf www/cart && mkdirp www/cart && cp -r cart/* www/cart",
     "config": "node config/copyConfig.js",
     "build": "npm run ionic:build",
     "serve": "npm run ionic:serve",
@@ -99,9 +99,10 @@
     "zone.js": "0.8.12"
   },
   "devDependencies": {
-    "@ionic/app-scripts": "2.1.4",
-    "electron": "1.8.1",
+    "@ionic/app-scripts": "^3.2.4",
+    "electron": "^7.1.1",
     "electron-builder": "^19.50.0",
+    "mkdirp": "^0.5.1",
     "typescript": "2.3.4"
   },
   "cordova": {
