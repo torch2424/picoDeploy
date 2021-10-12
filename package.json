@@ -100,7 +100,7 @@
   },
   "devDependencies": {
     "@ionic/app-scripts": "^3.2.4",
-    "electron": "^7.2.4",
+    "electron": "^11.5.0",
     "electron-builder": "^19.50.0",
     "mkdirp": "^0.5.1",
     "typescript": "2.3.4"
